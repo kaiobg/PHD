@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="../styles/global.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PTPT</title>
+  </head>
+  <body>
+    <header>
+      <h1>Questionário de identificação</h1>
+      <p>Por favor, preencha o formulário abaixo para que possamos conhecer melhor o seu perfil.</p>
+      <p>(PTPT)</p>
+      <div class="bt-container">
+        <button class= "button bt1" type="button">Voltar</button>
+        <button class= "button bt2" type="button">Entre na sua conta</button>
+      </div>
+      
+  </header>
+
+  <section id="questionnaire" class="container">
+    
+    
+    <form id="identification-form" action="#" method="post">
+        <label for="name">Nome Completo:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="age">Idade:</label>
+        <input type="number" id="age" name="age" required>
+
+        <label for="age">Data de nascimento:</label>
+        <input type="date" id="birth" name="birth" required>
+
+        <label for="gender">Gênero:</label>
+        <select id="gender" name="gender" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+            <option value="outro">Outro</option>
+            <option value="preferir">Prefiro não dizer</option>
+        </select>
+
+        <label for="occupation">Modalidade esportiva:</label>
+        <input type="text" id="modality" name="modality" required>
+
+        <label for="experience">Tempo de Experiência como treinador (a):</label>
+        <input type="number" id="experience" name="experience" placeholder="Em anos" required>
+
+        <label for="formation">Formação:</label>
+        <select id="formation" name="formation" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="em">Ensino médio completo</option>
+            <option value="gradc">Graduação em Educação Física completo</option>
+            <option value="gradin">Graduação em Educação Física incompleto</option>
+            <option value="esp">Especialização completa</option>
+            <option value="mest">Mestrado completo</option>
+            <option value="doc">Doutorado completo</option>
+            
+        </select>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Senha:</label>
+        <input type="password" id="senha" name="password"  minlength="6" required>
+
+        <label for="password">Confirmar senha:</label>
+        <input type="password" id="confirmarsenha" name="confirmpassword"  placeholder="Digite novamente sua senha" minlength="6" required>
+
+        
+        <label >
+          <input type="checkbox" id="tcle" name="tcle" required> Li e aceito os <a href="TCLE.pdf" target="_blank"> termos</a>
+        </label>
+
+
+        <button type="submit">Enviar</button>
+    </form>
+</section>
+
+  <footer>
+      <p> PTPT | Desenvolvido por Kaio Borges Guerrero</p>
+  </footer>
+
+</body>
+  </body>
+</html>

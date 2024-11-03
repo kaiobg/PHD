@@ -1,0 +1,115 @@
+/* Variáveis de Cores */
+:root {
+  --primary-color: #28a745;
+  --secondary-color: #3f51b5;
+  --third-color:#722f37;
+  --forth-color:#0b0b0b;
+  --background-color: #f4f4f4;
+  --text-color: #333;
+  --white-color: #fff;
+  --font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+/* Estilos Globais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* Header */
+header {
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+/* Botão CTA */
+
+
+button {
+  background-color: var(--forth-color);
+  color: var(--white-color);
+  padding: 12px 25px;
+  border: none;
+  border-radius: 1px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #ffffff; /* cor mais escura no hover */
+  color:#0b0b0b;
+  font-size: 1.2rem;
+}
+
+
+.bt-container {
+display:inline-flex;
+margin: 10px;
+cursor: pointer;
+
+}
+.bt1 {
+  background-color: #344396;
+  color: var(--white-color);
+}
+
+/* Rodapé */
+footer {
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+  padding: 20px;
+  text-align: center;
+  margin-top: 40px;
+}
+/* Layout Responsivo */
+@media (max-width: 768px) {
+  header h1 {
+      font-size: 1rem;
+  }
+
+  h2 {
+      font-size: 1rem;
+  }
+  footer{
+    padding: 10px;
+  }
+  button {
+      font-size: 1rem;
+      padding: 10px 20px;
+  }
+  .images {
+    flex-direction: column; /* Empilha as imagens verticalmente em telas menores */
+}
+
+.images img {
+    width: 100%; /* Cada imagem ocupa toda a largura do container */
+}
+#identification-form {
+  width: 90%;
+}
+}
