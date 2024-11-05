@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../styles/global.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PTPT</title>
+    <script src="./index.js" defer></script>
   </head>
   <body>
     <header>
@@ -22,8 +23,10 @@
 
   <section id="questionnaire" class="container">
     
+    <input type="text" id="pokemon">
+    <button type="button" onclick="getPoke()">Capturar</button>
     
-    <form id="identification-form" action="#" method="post">
+    <form id="identification-form" onsubmit="onSubmitForm(event)" >
         <label for="name">Nome Completo:</label>
         <input type="text" id="name" name="name" required>
 
@@ -70,13 +73,16 @@
         <input type="password" id="confirmarsenha" name="confirmpassword"  placeholder="Digite novamente sua senha" minlength="6" required>
 
         
-        <label >
-          <input type="checkbox" id="tcle" name="tcle" required> Li e aceito os <a href="TCLE.pdf" target="_blank"> termos</a>
+        <label style="display: flex; margin-top: 20px;">
+          <input type="checkbox" style="width: fit-content; width: 20px; margin-right: 20px; " id="tcle" name="tcle" required> 
+          Li e aceito os <a href="TCLE.pdf" style="padding-left: 10px;" target="_blank"> termos</a>
         </label>
 
 
         <button type="submit">Enviar</button>
     </form>
+
+    
 </section>
 
   <footer>
