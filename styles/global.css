@@ -4,11 +4,29 @@
   --secondary-color: #3f51b5;
   --third-color:#722f37;
   --forth-color:#0b0b0b;
+  --quinth-color:#534200;
   --background-color: #f4f4f4;
-  --text-color: #333;
+  --text-color: #000000;
   --white-color: #fff;
   --font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
   Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.bkg1{
+  background-color: rgba(240, 242, 242, 0.844);
+}
+.bkg2{
+  background-color: rgb(255, 255, 255);
+}
+.bkg3{
+  background: linear-gradient(90deg, #f4f4f4, #cdd3d5);
+}
+.bkg4{
+  background: linear-gradient(90deg, #cdd3d5, #cdd3d5);
+  
+}
+.bkg5{
+  background: linear-gradient(90deg, #cdd3d5, #f4f4f4);
 }
 
 /* Estilos Globais */
@@ -23,6 +41,7 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
+  
 }
 
 .container {
@@ -30,10 +49,10 @@ body {
   max-width: 1200px;
   margin: 0 auto;
 }
-/* Header */
+/* Header #3f51b5 */
 header {
-  background-color: var(--secondary-color);
-  color: var(--white-color);
+  background: linear-gradient(185deg, #534200, #cdd3d5);
+  color: var(--black-color);
   padding: 60px 20px;
   text-align: center;
 }
@@ -51,7 +70,8 @@ header p {
 
 
 button {
-  background-color: var(--forth-color);
+  background-color: var(--quinth-color);
+  margin-top: 10px;
   color: var(--white-color);
   padding: 12px 25px;
   border: none;
@@ -74,17 +94,18 @@ cursor: pointer;
 
 }
 .bt1 {
-  background-color: #344396;
-  color: var(--white-color);
+  background-color: #cdd3d5;
+  color: var(--black-color);
 }
 
 /* Rodapé */
 footer {
-  background-color: var(--secondary-color);
+  background-color: #534200;
   color: var(--white-color);
-  padding: 20px;
+  padding: 5px;
   text-align: center;
-  margin-top: 40px;
+  position: relative;
+  /* margin-top: 40px; */
 }
 /* Layout Responsivo */
 @media (max-width: 768px) {
@@ -111,5 +132,9 @@ footer {
 }
 #identification-form {
   width: 90%;
+}
+#highlights .highlight-box {
+  flex-direction: column;
+  gap: 10px;
 }
 }

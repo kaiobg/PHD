@@ -17,9 +17,30 @@ header p {
     font-style: italic;
 }
 
+/* Seção de Destaques */
+#highlights .highlight-box {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    justify-content: space-around;
+}
+
+.highlight {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    text-align: center;
+}
+
+.highlight h3 {
+    color: #6A0DAD;
+}
+
 /* Seções de Conteúdo */
 section {
-    padding: 40px 0;
+    padding: 40px 10%;
     text-align: center;
 }
 
@@ -32,6 +53,7 @@ h2 {
 p {
     font-size: 1.1rem;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 ul {
@@ -46,12 +68,7 @@ ul li {
 
 
 
-.bkg1{
-    background-color: rgba(240, 242, 242, 0.844);
-}
-.bkg2{
-    background-color: rgb(255, 255, 255);
-}
+
 
 /* Imagens lado a lado na seção "Sobre o Projeto" */
 .images {

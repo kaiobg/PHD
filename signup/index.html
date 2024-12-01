@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="../styles/global.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PTPT</title>
-    <script src="./index.js" defer></script>
+    <script type="module"  src="./index.js" defer></script>
   </head>
   <body>
     <header>
       <h1>Questionário de identificação</h1>
-      <p>Por favor, preencha o formulário abaixo para que possamos conhecer melhor o seu perfil.</p>
+      <p>Crie sua conta para que seja possível encontrar suas Tendências de Perfil Psicológico.</p>
       <p>(PTPT)</p>
       <div class="bt-container">
         <button class= "button bt1" type="button">Voltar</button>
@@ -23,10 +23,9 @@
 
   <section id="questionnaire" class="container">
     
-    <input type="text" id="pokemon">
-    <button type="button" onclick="getPoke()">Capturar</button>
     
-    <form id="identification-form" onsubmit="onSubmitForm(event)" >
+    
+    <form id="identification-form" >
         <label for="name">Nome Completo:</label>
         <input type="text" id="name" name="name" required>
 
@@ -42,13 +41,13 @@
             <option value="masculino">Masculino</option>
             <option value="feminino">Feminino</option>
             <option value="outro">Outro</option>
-            <option value="preferir">Prefiro não dizer</option>
+            <option value="nao-falx">Prefiro não dizer</option>
         </select>
 
         <label for="occupation">Modalidade esportiva:</label>
         <input type="text" id="modality" name="modality" required>
 
-        <label for="experience">Tempo de Experiência como treinador (a):</label>
+        <label for="experience">Tempo de Experiência como treinador (a) nesta modalidade:</label>
         <input type="number" id="experience" name="experience" placeholder="Em anos" required>
 
         <label for="formation">Formação:</label>
@@ -67,15 +66,15 @@
         <input type="email" id="email" name="email" required>
 
         <label for="password">Senha:</label>
-        <input type="password" id="senha" name="password"  minlength="6" required>
+        <input type="password" id="senha" name="password"  placeholder="Mínimo de 6 caracteres" minlength="6" required>
 
         <label for="password">Confirmar senha:</label>
-        <input type="password" id="confirmarsenha" name="confirmpassword"  placeholder="Digite novamente sua senha" minlength="6" required>
+        <input type="password" id="confirmpassword" name="confirmpassword"  placeholder="Digite novamente sua senha" minlength="6" required>
 
         
-        <label style="display: flex; margin-top: 20px;">
-          <input type="checkbox" style="width: fit-content; width: 20px; margin-right: 20px; " id="tcle" name="tcle" required> 
-          Li e aceito os <a href="TCLE.pdf" style="padding-left: 10px;" target="_blank"> termos</a>
+        <label style="display: flex; margin-top: 20px; gap: 20px">
+          <input type="checkbox" id="tcle" name="tcle" required> 
+          <span>Li e aceito os <a href="TCLE.pdf" style="padding-left: 10px;" target="_blank"> termos</a></span>
         </label>
 
 
