@@ -20,6 +20,7 @@ export const addUser = async (data) => {
       doc(db, 'users', loginInfo.uid), 
       userData,
     );
+    
   } catch(error) {
     console.error(error);
   }

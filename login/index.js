@@ -17,7 +17,7 @@ const onSubmitForm = (e)=>{
 
     firebaseService.auth.signIn(email,senha);
 
-    window.location = "http://kaioguerrero.com";
+    window.location = "/coach/";
 }
 
 document.querySelector("#identification-form").addEventListener("submit",onSubmitForm)

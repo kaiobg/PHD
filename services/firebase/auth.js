@@ -51,7 +51,7 @@ export const checkAuthState = () => {
       console.log('user is signed in');
 
       if (document.querySelector('[data-redirect-if-logged-in]')) {
-        window.location = '/';
+        window.location = '/home/';
         return;
       }
 
@@ -87,7 +87,7 @@ export const checkAuthState = () => {
     console.log('user is not signed in');
 
     if (document.querySelector('[data-redirect-if-not-logged-in]')) {
-      window.location = '/';
+      window.location = '/home/';
       return;
     }
 

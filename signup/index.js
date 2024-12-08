@@ -8,7 +8,7 @@ window.signOut = firebaseService.auth.signOut;
 
 
 
-const onSubmitForm = (e)=>{
+const onSubmitForm = async (e)=>{
     e.preventDefault ()
     console.log(e)
     const form = e.target
@@ -71,8 +71,8 @@ const onSubmitForm = (e)=>{
         name, birth, age, gender,modality,experience,formation,email,password
     }
 
-    firebaseService.user.addUser(userData)
-    
+    await firebaseService.user.addUser(userData)
+    window.location="/coach"
 };
 
 
