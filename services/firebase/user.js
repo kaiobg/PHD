@@ -22,7 +22,7 @@ export const addUser = async (data) => {
     );
     
   } catch(error) {
-    console.error(error);
+    notification.error(e);
   }
 };
 
