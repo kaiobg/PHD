@@ -1,16 +1,8 @@
 import { firebaseService, notification } from '../services';
 
-// TEMP CODE
-window.email = 'teste5@teste.com';
-window.password = 'senha123';
-window.signIn = firebaseService.auth.signIn;
-window.signOut = firebaseService.auth.signOut;
+const onSubmitForm = async (e) => {
+    e.preventDefault();
 
-
-
-const onSubmitForm = async (e)=>{
-    e.preventDefault ()
-    console.log(e)
     const form = e.target
     const name=form.name.value.trim()
     const birth=form.birth.value.trim()
@@ -32,7 +24,7 @@ const onSubmitForm = async (e)=>{
         notification.error("Responde sua data de nascimento")
         return;
     }
-    if (+age>=18) {
+    if (+age < 18) {
         notification.error("Não poderá participar, volte aos 18!")
         return;
     }
@@ -71,8 +63,9 @@ const onSubmitForm = async (e)=>{
         name, birth, age, gender,modality,experience,formation,email,password
     }
 
-    await firebaseService.user.addUser(userData)
-    window.location="/coach"
+    await firebaseService.user.addUser(userData);
+    
+    window.location = "/coach/";
 };
 
 
