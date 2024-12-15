@@ -2,35 +2,37 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="../styles/global.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Painel do Treinador</title>
 
-    <link rel="stylesheet" href="index.css">
-
-    <script type="module" src="../main.js"></script>
-    <script type="module" src="./index.js" defer></script>
 </head>
 <body data-redirect-if-not-logged-in>
-
-    <header class="dashboard-header">
-        <h1>Bem-vindo, Treinador!</h1>
-        <p>Escolha uma das opções abaixo para começar:</p>
-        <button id="logout-btn">Logout</button>
-    </header>
-    <main class="button-container">
-        <a href="/reg_emocional/">Questionário A</a>
-        <a href="/rel_interpessoal/">Questionário B</a>
-        <a href="/atividade/">Questionário B</a>
-        <a href="/perfil/">
-            <button>Meu Perfil</button>
-        </a>
-
-        <button >Gerenciar Alunos</button>
-        <button >Criar Treinos</button>
-        <button >Ver Estatísticas</button>
-    </main>
-
    
+        <header>
+          <h1>Bem Vindo (a), Treinadores (as)</h1>
+          <p>Escolha uma das opções abaixo para começar</p>
+          <div class="bt-container">
+            <a href="/home/">
+                <button class= "button bt2" >Sair</button>
+              </a>
+            
+          </div>
+      
+      <main class="button-container">
+        
+
+        <button >Questionário 1</button>
+        <button >Questionário 2</button>
+        <button >Questionário 3</button>
+    </main>
+     
+    </header>
+      <footer>
+          <p> PTPT | Desenvolvido por Kaio Borges Guerrero</p>
+      </footer>
+
 </body>
 </html>
