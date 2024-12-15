@@ -8,8 +8,6 @@ document.getElementById("logout-btn").addEventListener("click",()=>{
     firebaseService.auth.signOut()
 } );
 
-console.log('ausdhiaush');
-
 // Example: https://www.highcharts.com/demo/highcharts/polar-spider
 
 HighchartsMore.chart('chart-container', {
@@ -69,22 +67,22 @@ HighchartsMore.chart('chart-container', {
   },
   
   legend: {
-    align: 'right',
-    verticalAlign: 'middle',
-    layout: 'vertical'
+    align: 'center',
+    verticalAlign: 'bottom',
+    layout: 'horizontal'
   },
   
-  series: [{
-    // type: 'area',
-    name: 'Allocated Budget',
-    data: [43000, 19000, 60000, 35000, 17000, 10000],
-    pointPlacement: 'on'
-  }, {
-    // type: 'area',
-    name: 'Actual Spending',
-    data: [50000, 39000, 42000, 31000, 26000, 14000],
-    pointPlacement: 'on'
-  }],
+  series: [
+    {
+      name: 'Allocated Budget',
+      data: [43000, 19000, 60000, 35000, 17000, 10000],
+      pointPlacement: 'on'
+    }, {
+      name: 'Actual Spending',
+      data: [50000, 39000, 42000, 31000, 26000, 14000],
+      pointPlacement: 'on'
+    }
+  ],
   
   responsive: {
     rules: [{
