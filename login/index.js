@@ -7,9 +7,11 @@ const onSubmitForm = async (e) => {
   const email = form.email.value;
   const password = form.password.value;
 
-  await firebaseService.auth.signIn(email, password);
+  const user = await firebaseService.auth.signIn(email, password);
 
-  window.location = '/coach/';
+  if(user) {
+    window.location = '/coach/';
+  }
 };
 
 document.querySelector('#identification-form').addEventListener('submit', onSubmitForm);

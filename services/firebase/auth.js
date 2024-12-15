@@ -1,13 +1,15 @@
 import {
-  getAuth,
+  AuthErrorCodes,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
+  getAuth,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signOut as firebaseSignOut,
 } from 'firebase/auth';
 
 import { app } from './firebase-app';
-import { firebaseService } from './index';
+
+import { firebaseService, notification } from '../../services';
 
 const auth = getAuth(app);
 
@@ -22,6 +24,7 @@ export const signUp = async (email, password) => {
     return user;
   } catch (error) {
     console.error(error);
+    notification.error(error);
   }
 };
 
@@ -31,7 +34,14 @@ export const signIn = async (email, password) => {
 
     return user;
   } catch (error) {
-    console.error(error);
+    switch(error.code) {
+      case AuthErrorCodes.INVALID_LOGIN_CREDENTIALS:
+        notification.error('Email ou senha inválidos');
+        break;
+      default:
+        console.error(error);
+        break;
+    }
   }
 };
 
@@ -42,6 +52,7 @@ export const signOut = async () => {
     firebaseService.user.logoutUser();
   } catch (error) {
     console.error(error);
+    notification.error(error);
   }
 };
 
