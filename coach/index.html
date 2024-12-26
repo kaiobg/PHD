@@ -16,27 +16,37 @@
    
         <header>
           <h1>Bem Vindo (a), Treinadores (as)</h1>
-          <p>Escolha uma das opções abaixo para começar</p>
           <div class="bt-container">
-            <button id="logout-btn" class= "button bt2" >Sair</button>
-          </div>
-      
-      <main class="button-container">
-        
-
-        <button >Questionário 1</button>
-        <button >Questionário 2</button>
-        <button >Questionário 3</button>
+            <a href="/home/">
+                <button onclick="history.back()">Sair</button>
+            </a>  
+          </div> 
+        </header>
+      <div class="container">
+        <div class="main">
+          <section id="interface" >
+          <div class="bt-container">
+            
+            <a href="/login/">
+                <button >Atitude</button>
+            </a>
+            <a href="/login/">
+              <button>Relação Interpessoal</button>
+          </a>
+          <a href="/login/">
+            <button>Regulação Emocional</button>
+        </a>
+        </div>
 
         <figure class="highcharts-figure">
             <div id="chart-container"></div>
         </figure>
-    </main>
-     
-    </header>
+      </section>
+        </div>
+      </div>
+    
       <footer>
-          <p> PTPT | Desenvolvido por Kaio Borges Guerrero</p>
-      </footer>
-
+        <p> PTPT | Desenvolvido por Kaio Borges Guerrero</p>
+    </footer>
 </body>
 </html>

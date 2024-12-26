@@ -7,27 +7,30 @@
     <link rel="stylesheet" href="../styles/global.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>PTPT</title>
+    <title>Signup</title>
 
     <script type="module" src="../main.js"></script>
     <script type="module"  src="./index.js" defer></script>
   </head>
   <body>
     <header>
-      <h1>Questionário de identificação</h1>
-      <p>Crie sua conta para que seja possível encontrar suas Tendências de Perfil Psicológico.</p>
-      <p>(PTPT)</p>
+      <h1>Crie seu cadastro</h1>
+      
       <div class="bt-container">
-        <button class= "button bt1" type="button" onclick="history.back()">Voltar</button>
-        <button class= "button bt2" type="button">Entre na sua conta</button>
-      </div>
+        <a href="/home/">
+            <button onclick="history.back()">Voltar</button>
+        </a>
+        <a href="/login/">
+            <button>Entre na sua conta</button>
+        </a>
+    </div>
+      
       
   </header>
-
-  <section id="questionnaire" class="container">
-    
-    
-    
+  
+  <div class="container">
+    <div class="main">
+  <section id="questionnaire" >
     <form id="identification-form" >
         <label for="name">Nome Completo:</label>
         <input type="text" id="name" name="name" required>
@@ -86,11 +89,12 @@
 
     
 </section>
-
+    </div>
+    </div>
   <footer>
       <p> PTPT | Desenvolvido por Kaio Borges Guerrero</p>
   </footer>
 
 </body>
-  </body>
+  
 </html>

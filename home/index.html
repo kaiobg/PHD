@@ -1,100 +1,144 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="../styles/global.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PTPT</title>
-
-    <script type="module" src="../main.js"></script>
-  </head>
-  <body>
+    <script type="module"  src="./main.js"></script>
+</head>
+<body>
     <header>
-      <h1>Perfil de Tendências Psicológicas em Treinadores (as)</h1>
-      <p>(PTPT)</p>
-      <div class="bt-container">
-        <a href="/login/">
-          <button>Entre na sua conta</button>
-        </a>
-        <a href="/signup/">
-          <button>Crie uma conta</button>
-        </a>
+        <h1>Perfil de Tendências Psicológicas em Treinadores (as) (PTPT)</h1>
+        <div class="bt-container">
+            <a href="/login/">
+                <button>Entre na sua conta</button>
+            </a>
+            <a href="/signup/">
+                <button>Crie uma conta</button>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main">
+            <div class="post">
+                <h2>Quer ajudar a ciência e ainda descobrir suas tendências psicológicas no esporte de forma gratuita?!</h2>
+                <p>Este projeto de doutorado investiga os principais aspectos psicológicos presentes em treinadores (as).
+                   Ao se cadastrar e responder os questionários, você saberá seus principais resultados em três vertentes diferentes
+                   (Atitude, Regulação emocional e Relação interpessoal). Poderá comparar com a média dos outros treinadores (as) e
+                   receber dicas de intervenções, além de apoio especializado para tirar suas dúvidas. Tudo de graça.
+                </p>
+            </div>
+            <section  class="post">
+                <h2>O que é o PTPT</h2>
+                <div class="video-container">
+                    <iframe 
+                        width="560" 
+                        height="315" 
+                        src="https://www.youtube.com/embed/SEU_VIDEO_ID" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </section>
+            
+            <section id="highlights" class="post">
+                <h1>Benefícios do Projeto</h1>
+                <div class="highlight-box">
+                    <div class="highlight sqr1">
+                        <h3>Conhecimento Avançado</h3>
+                        <p>Oferecemos uma análise detalhada de suas tendências psicológicas de forma gratuita. Basta responder os questionários.</p>
+                    </div>
+                    <div class="highlight sqr1">
+                        <h3 >Estratégias Práticas</h3>
+                        <p>Fornecemos as principais sugestões para melhorar os aspectos psicológicos defasados.</p>
+                    </div>
+                    <div class="highlight sqr1">
+                        <h3 >Apoio Profissional</h3>
+                        <p>Ao participar da pesquisa, você estará em contato com profissionais que possam tirar suas dúvidas.</p>
+                    </div>
+                </div>
+            </section>
+      
         
+          <section id="highlights" class="post">
+            <h1>Principais dúvidas</h1>
+            <div class="highlight-box">
+                <div class="highlight sqr1">
+                    <h3>Quanto tempo demora?</h3>
+                    <p>Cerca de 20 minutos para responder os três questionários.</p>
+                </div>
+                <div class="highlight sqr1">
+                    <h3>Quando sai o resultado?</h3>
+                    <p>O resultado aparece na hora, basta finalizar todos os questionários.</p>
+                </div>
+                <div class="highlight sqr1">
+                    <h3>Posso fazer mais de uma vez?</h3>
+                    <p>Você poderá refazer os testes a cada 4 meses.</p>
+                </div>
+                <div class="highlight sqr1">
+                  <h3>Para que eu uso os resultados?</h3>
+                  <p>Com o resultado, poderá realizar intervenções para melhorar possíveis defasagens.
+                  </p>
+              </div>
+            </div>
+        </section>
         
-      </div>
-  </header>
-
-  <section id="about" class="bkg1">
-      <h2>Quer ajudar a ciência e descobrir suas tendências psicológicas no esporte?!</h2>
-      <p>Este projeto de doutorado investiga os principais aspectos psicológicos presentes em treinadores (as).
-        Ao se cadastrar e responder os questionários, você saberá seus principais resultados em três vertentes diferentes (Atitude,
-        Regulação emocional e Relação interpessoal). Poderá comparar com a média dos outros treinadores (as) e receber dicas de intervenções. Além de 
-        apoio especializado para tirar suas dúvidas. Tudo de graça.
-      </p>
-      <div class="images">
-        <!-- <img src="../images/teste1.png" alt="Imagem Descritiva 1"> -->
-        <!-- <img src="../images/teste1.png" alt="Imagem Descritiva 2"> -->
+          <section  class="post">
+              <h1>Por que Este Projeto é Importante?</h1>
+              <p>Você já se deparou com muitas pesquisas focadas no treinador ou treinadora? Eu aposto que não. 
+                Os (as) treinadores (as) desempenham um papel central no desenvolvimento dos atletas e alunos, 
+                tanto tecnicamente quanto mentalmente. 
+                Ao entender os perfis psicológicos, este projeto contribui diretamente para a melhoria 
+                da performance de atletas e equipes.</p>
+              <div class="bt-contato">
+                <a href="/login/">
+                    <button class="call">Entre em contato</button>
+                </a>
+                
+         </div>
+            </section>
+        </div>
+        <div class="sidebar">
+            <!-- <div class="box">
+                <h3>Próximos eventos</h3>
+                <ul id="event-list">
+                    <li><span>7 Janeiro:</span> Perguntas e respostas semanais</li>
+                    <li><span>9 Janeiro:</span> Mindfulness com convidado especial</li>
+                    <li><span>14 Janeiro:</span> Sessão ao vivo de coaching</li>
+                    <li><span>21 Janeiro:</span> Fundamentos de relacionamentos saudáveis</li>
+                </ul>
+            </div> -->
+            <div class="box">
+                <h3>Publicações em alta</h3>
+                <ul>
+                    <li><button>Como incorporar técnicas de mindfulness em um negócio próspero?</button></li>
+                    <li><button>Alguém mais notou uma onda de inspiração desde que iniciou a prática?</button></li>
+                    <li><button>Como você concilia a meditação diária com uma agenda agitada?</button></li>
+                </ul>
+            </div>
+            <div class="box">
+                <h3>Total de Treinadores (as) Cadastrados</h3>
+                <p id="user-counter">Carregando...</p>
+            </div>
+            <script>
+                // Simulação de contagem de usuários
+                const userCounter = document.getElementById('user-counter');
+                // Esta contagem deve ser substituída pelo valor dinâmico vindo do backend
+                const fakeUserCount = 12071993; 
+            
+                // Exibindo o valor no contador
+                userCounter.textContent = fakeUserCount + " usuários registrados!";
+            </script>
+        </div>
     </div>
-    </section>
-
-  <section id="highlights" class="bkg2">
-    <h1>Benefícios do Projeto</h1>
-    <div class="highlight-box">
-        <div class="highlight bkg3">
-            <h3 class="bkg5">Conhecimento Avançado</h3>
-            <p>Oferecemos uma análise detalhada de suas tendências psicológicas de forma gratuita. Basta responder os questionários.</p>
-        </div>
-        <div class="highlight bkg4">
-            <h3 class="bkg2">Estratégias Práticas</h3>
-            <p>Fornecemos as principais sugestões para melhorar os aspectos psicológicos defasados.</p>
-        </div>
-        <div class="highlight bkg5">
-            <h3 class="bkg3">Apoio Profissional</h3>
-            <p>Ao participar da pesquisa, você estará em contato com profissionais que possam tirar suas dúvidas.</p>
-        </div>
-    </div>
-</section>
-
-
-  <section id="highlights" class="bkg1">
-    <h1>Principais dúvidas</h1>
-    <div class="highlight-box">
-        <div class="highlight bkg2">
-            <h3>Quanto tempo demora?</h3>
-            <p>Cerca de 20 minutos para responder os três questionários.</p>
-        </div>
-        <div class="highlight bkg2">
-            <h3>Quando sai o resultado?</h3>
-            <p>O resultado aparece na hora, basta finalizar todos os questionários.</p>
-        </div>
-        <div class="highlight bkg2">
-            <h3>Posso fazer mais de uma vez?</h3>
-            <p>Você poderá refazer os testes depois de 4 meses.</p>
-        </div>
-        <div class="highlight bkg2">
-          <h3>Para que eu uso os resultados?</h3>
-          <p>Com o resultado, poderá realizar intervenções para melhorar possíveis defasagens.
-          </p>
-      </div>
-    </div>
-</section>
-
-  <section id="why-important" class="bkg2">
-      <h1>Por que Este Projeto é Importante?</h1>
-      <p>Você já se deparou com muitas pesquisas focadas no treinador ou treinadora? Eu aposto que não. 
-        Os treinadores (as) desempenham um papel central no desenvolvimento dos atletas e alunos, 
-        tanto tecnicamente quanto mentalmente. 
-        Ao entender os perfis psicológicos de lideranças esportivas, este projeto contribui diretamente para a melhoria 
-        da performance de atletas e equipes.</p>
-      <button onclick="alert('Quer saber mais? Entre em contato!')">Entre em Contato</button>
-  </section>
-
-  <footer>
-      <p> PTPT | Desenvolvido por Kaio Borges Guerrero</p>
-  </footer>
-
-  </body>
+    <footer>
+        <p> PTPT | Desenvolvido por Kaio Borges Guerrero</p>
+    </footer>
+</body>
 </html>

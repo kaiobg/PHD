@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="../styles/global.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Atitude</title>
+    
+    <script type="module" src="../main.js"></script>
+    <script type="module" src="./index.js"></script>
+
+</head>
+<body data-redirect-if-not-logged-in>
+   
+        <header>
+          <h1>Atitude</h1>
+          <div class="bt-container">
+            <a href="/coach/">
+                <button onclick="history.back()">Voltar</button>
+            </a>  
+          </div> 
+        </header>
+        <div class="container">
+        <div class="quiz-container">
+          
+          <div class="progress-bar">
+            <span></span>
+          </div>
+          <div id="question"> Carregando...</div>
+          <ul class="options">
+            <li><button data-value="1">Discordo totalmente</button></li>
+            <li><button data-value="2">Discordo</button></li>
+            <li><button data-value="3">Neutro</button></li>
+            <li><button data-value="4">Concordo</button></li>
+            <li><button data-value="5">Concordo totalmente</button></li>
+          </ul>
+          <div class="bt-container">
+            <a href="/home/">
+             
+                <button onclick="history.back()">Pergunta anterior</button>
+            
+          </a>  
+            <a href="/home/">
+              <button onclick="history.back()">Próxima pergunta</button>
+          </a>  
+          </div> 
+        </div>
+      </div>
+      <footer>
+        <p> PTPT | Desenvolvido por Kaio Borges Guerrero</p>
+    </footer>
+</body>
+</html>
