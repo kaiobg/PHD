@@ -5,47 +5,55 @@
     <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="../styles/global.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    
     <title>Painel do Treinador</title>
-
+    
     <script type="module" src="../main.js"></script>
     <script type="module" src="./index.js"></script>
-
+    
 </head>
 <body data-redirect-if-not-logged-in>
-   
-        <header>
-          <h1>Bem Vindo (a), Treinadores (as)</h1>
-          <div class="bt-container">
+    
+    <header>
+        <h1>Bem Vindo (a), Treinadores (as)</h1>
+        <div class="bt-container">
             <a href="/home/">
                 <button onclick="history.back()">Sair</button>
             </a>  
-          </div> 
-        </header>
-      <div class="container">
+        </div> 
+    </header>
+    <div class="container">
         <div class="main">
-          <section id="interface" >
-          <div class="bt-container">
-            
-            <a href="/login/">
-                <button >Atitude</button>
-            </a>
-            <a href="/login/">
-              <button>Relação Interpessoal</button>
-          </a>
-          <a href="/login/">
-            <button>Regulação Emocional</button>
-        </a>
-        </div>
+            <section id="first-access" class="display-none">
+                <div class="bt-container">
+                    <a href="/questionnaires/attitude/">
+                        <button>Responder questionários</button>
+                    </a>
+                </div>
+            </section>
 
-        <figure class="highcharts-figure">
-            <div id="chart-container"></div>
-        </figure>
-      </section>
+            <section id="interface" class="display-none">
+                <div class="bt-container">
+                    
+                    <a href="/login/">
+                        <button >Atitude</button>
+                    </a>
+                    <a href="/login/">
+                        <button>Relação Interpessoal</button>
+                    </a>
+                    <a href="/login/">
+                        <button>Regulação Emocional</button>
+                    </a>
+                </div>
+                
+                <figure class="highcharts-figure">
+                    <div id="chart-container"></div>
+                </figure>
+            </section>
         </div>
-      </div>
+    </div>
     
-      <footer>
+    <footer>
         <p> PTPT | Desenvolvido por Kaio Borges Guerrero</p>
     </footer>
 </body>
