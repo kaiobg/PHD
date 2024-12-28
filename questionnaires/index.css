@@ -1,4 +1,8 @@
 
+:root {
+  --form-progress: 0%;
+}
+
 .quiz-container {
   padding: 40px ;
   text-align: center;
@@ -27,7 +31,7 @@
 .progress-bar span {
   display: block;
   height: 100%;
-  width: 40%; /* Atualize dinamicamente */
+  width: var(--form-progress);
   background-color: #4caf50;
 }
 
@@ -58,10 +62,75 @@
   transition: background 0.3s, border-color 0.3s;
 }
 
-.options button:hover {
+.options button:hover, 
+.options button.selected {
   background-color: #534200;
   color: white;
 }
 .button{
   background-color: #4caf50;
 }
+
+/* Steps style */
+
+.steps {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 1rem;
+}
+
+.step {
+  background: var(--background-color);
+  z-index: 1;
+  padding: 0 1rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.step-circle {
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step.done .step-circle {
+  background: green;
+  color: white;
+}
+
+.step.done .step-number {
+  display: none;
+}
+
+.step.done .step-circle::after {
+  content: '\2713';
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.step.current .step-circle {
+  background: purple;
+  color: white;
+}
+
+.step.next .step-circle {
+  background: gray;
+  color: white;
+}
+
+.steps-divisor {
+  position: absolute;
+  width: 100%;
+}
+
+/* END Steps style */

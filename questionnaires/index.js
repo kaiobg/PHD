@@ -1,48 +1,103 @@
+// TODO If there is an on going form, load current data and go to correct step
+// TODO If user goes back to previous step, load that step data
 
-const questions =[
-  {
-    number:1,
-    enunciado:"1. Voce é seguro de suas decisões",
-  },
-  {
-    number:2,
-    enunciado:"2. Voce é seguro de suas decisões",
-  },
-  {
-    number: 3,
-    enunciado:"3. Voce é seguro de suas decisões",
-  },
-  {
-    number:4,
-    enunciado:"4. Voce é seguro de suas decisões",
-  },
-  {
-    number:5,
-    enunciado:"5. Voce é seguro de suas decisões",
-  },
-];
+import { utils } from '../utils';
+
+import { NEXT_PAGE, QUESTIONS } from './constants';
+
+const questionEl = document.querySelector('#question');
+const questionOptionsEls = document.querySelectorAll('#question-options button');
+const btnPreviousQuestion = document.querySelector('#btn-previous-question');
+const btnNextQuestion = document.querySelector('#btn-next-question');
+const btnEndForm = document.querySelector('#btn-end-form');
 
 
-const Likert =[
-  {
-    label: "Dicordo totalmente",
-    value: 1,
-  },
-  {
-    label: "Dicordo ",
-    value: 2,
-  },
-  {
-    label: "Neutro",
-    value: 3,
-  },
-  {
-    label: "Concordo",
-    value: 4,
-  },
-  {
-    label: "Concordo totalmente",
-    value: 5,
-  },
-];
+const currentForm = document.querySelector('#current-form').value;
+const questions = QUESTIONS[currentForm];
+const lastQuestion = questions.length - 1;
+let currentQuestion = 0;
 
+const answers = [];
+
+const updateProgressBar = () => {
+  const value = (currentQuestion + 1) / questions.length * 100;
+  utils.updateCSSVar('--form-progress', `${value}%`);
+};
+
+const getQuestion = () => {
+  return questions[currentQuestion];
+};
+
+const updateQuestionLayout = () => {
+  questionEl.innerText = `${currentQuestion + 1}. ${getQuestion()}`;  
+
+  if(currentQuestion == lastQuestion) {
+    btnNextQuestion.classList.add('display-none');
+    btnEndForm.classList.remove('display-none');
+  } else {
+    btnNextQuestion.classList.remove('display-none');
+    btnEndForm.classList.add('display-none');
+  }
+
+  const showPreviousBtnHandler = currentQuestion == 0 ? 'add' : 'remove';
+  btnPreviousQuestion.classList[showPreviousBtnHandler]('visibility-hidden');
+
+  updateBtnsState(answers[currentQuestion]?.value || null);
+};
+
+const previousQuestion = () => {
+  if(currentQuestion <= 0) {
+    currentQuestion = 0;
+  } else {
+    currentQuestion--;
+  }
+
+  updateQuestionLayout();
+};
+
+const nextQuestion = (event) => {
+  if(currentQuestion >= lastQuestion) {
+    currentQuestion = lastQuestion;
+  } else {
+    currentQuestion++;
+  }
+
+  updateQuestionLayout();
+};
+
+const sendForm = () => {
+  // TODO Save values here
+  
+  // Go to next form
+  window.location = NEXT_PAGE[currentForm];
+};
+
+const updateBtnsState = (selected = null) => {
+  btnNextQuestion.disabled = !selected;
+  
+  questionOptionsEls.forEach(btn => {
+    const classHandler = btn.dataset.value == selected ? 'add' : 'remove';
+    btn.classList[classHandler]('selected');
+  });
+};
+
+questionOptionsEls.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const value = +btn.dataset.value;
+
+    updateBtnsState(value);
+
+    answers[currentQuestion] = {
+      question: getQuestion(),
+      value, 
+    };
+
+    updateProgressBar();
+  });
+});
+
+btnPreviousQuestion.addEventListener('click', previousQuestion);
+btnNextQuestion.addEventListener('click', nextQuestion);
+btnEndForm.addEventListener('click', sendForm);
+
+updateQuestionLayout();

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="../../styles/global.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Regulação Emocional</title>
+    
+    <script type="module" src="../../main.js"></script>
+    <script type="module" src="../index.js"></script>
+    
+</head>
+<body data-redirect-if-not-logged-in>
+
+    <input type="hidden" id="current-form" value="emotional_regulation" />
+    
+    <div class="steps">
+        <hr class="steps-divisor" />
+        <div class="step done">
+            <div class="step-circle">
+                <span class="step-number">1</span>
+            </div>
+            <span class="step-title">Atitude</span>
+        </div>
+        <div class="step done">
+            <div class="step-circle">
+                <span class="step-number">2</span>
+            </div>
+            <span class="step-title">Relação Interpessoal</span>
+        </div>
+        <div class="step current">
+            <div class="step-circle">
+                <span class="step-number">3</span>
+            </div>
+            <span class="step-title">Regulação Emocional</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="quiz-container">
+            <div class="progress-bar">
+                <span></span>
+            </div>
+
+            <div id="question"></div>
+            
+            <ul id="question-options" class="options">
+                <li>
+                    <button data-value="1">Discordo totalmente</button>
+                </li>
+                <li>
+                    <button data-value="2">Discordo</button>
+                </li>
+                <li>
+                    <button data-value="3">Neutro</button>
+                </li>
+                <li>
+                    <button data-value="4">Concordo</button>
+                </li>
+                <li>
+                    <button data-value="5">Concordo totalmente</button>
+                </li>
+            </ul>
+
+            <div class="bt-container">
+                <button id="btn-previous-question">Pergunta anterior</button>
+                <button id="btn-next-question" disabled>Próxima pergunta</button>
+                <button id="btn-end-form" class="display-none">Enviar respostas</button>
+            </div> 
+        </div>
+    </div>
+    <footer>
+        <p> PTPT | Desenvolvido por Kaio Borges Guerrero</p>
+    </footer>
+</body>
+</html>

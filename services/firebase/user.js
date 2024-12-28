@@ -1,10 +1,11 @@
-import { doc, setDoc, getFirestore, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getFirestore, getDoc, collection, getDocs } from 'firebase/firestore';
 
 import { notification } from '../notification';
 
 import { app } from './firebase-app';
 
 import { firebaseService } from './index';
+import { DATABASE_KEYS, FORMS_QTY } from './constants';
 
 const db = getFirestore(app);
 
@@ -26,6 +27,13 @@ export const addUser = async (data) => {
   }
 };
 
+export const hasAnswerForAllForms = async (uid) => {
+  const collectionRef = collection(db, DATABASE_KEYS.USERS, uid, DATABASE_KEYS.FORMS);
+  const docsSnap = await getDocs(collectionRef);
+
+  return docsSnap.docs.length == FORMS_QTY;
+};
+
 export const loginUser = async (uid) => {
   try {
     const docRef = doc(db, 'users', uid);
@@ -34,7 +42,10 @@ export const loginUser = async (uid) => {
     if(docSnap.exists()) {
       const userData = await docSnap.data();
 
-      sessionStorage.setItem(USER_SESSION_KEY, JSON.stringify(userData));
+      sessionStorage.setItem(USER_SESSION_KEY, JSON.stringify({
+        ...userData,
+        hasAnswerForAllForms: await hasAnswerForAllForms(uid),
+      }));
     } else {
       throw new Error('User data not found. Contact administrator');
     }
