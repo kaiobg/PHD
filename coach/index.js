@@ -1,12 +1,12 @@
-import Highcharts from 'highcharts';
+import Highcharts from 'highcharts'; // Don't remove this
 import 'highcharts/modules/accessibility';
 import HighchartsMore from 'highcharts/highcharts-more';
 
 import { firebaseService } from '../services';
 
-document.getElementById("logout-btn").addEventListener("click",()=>{
+document.getElementById("logout-btn")?.addEventListener("click",()=>{
     firebaseService.auth.signOut()
-} );
+});
 
 // Example: https://www.highcharts.com/demo/highcharts/polar-spider
 
