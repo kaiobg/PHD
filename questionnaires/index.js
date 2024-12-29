@@ -20,7 +20,10 @@ let currentQuestion = 0;
 const answers = [];
 
 const updateProgressBar = () => {
-  const value = (currentQuestion + 1) / questions.length * 100;
+  // TODO Improve this calc
+  // This should be related to current question, not the answers
+  // For last question, consider answer
+  const value = (currentQuestion) / questions.length * 100;
   utils.updateCSSVar('--form-progress', `${value}%`);
 };
 
@@ -43,6 +46,8 @@ const updateQuestionLayout = () => {
   btnPreviousQuestion.classList[showPreviousBtnHandler]('visibility-hidden');
 
   updateBtnsState(answers[currentQuestion]?.value || null);
+
+  updateProgressBar();
 };
 
 const previousQuestion = () => {
@@ -67,6 +72,7 @@ const nextQuestion = (event) => {
 
 const sendForm = () => {
   // TODO Save values here
+  // Use mocked data for now
   
   // Go to next form
   window.location = NEXT_PAGE[currentForm];
@@ -85,14 +91,12 @@ questionOptionsEls.forEach(btn => {
   btn.addEventListener('click', () => {
     const value = +btn.dataset.value;
 
-    updateBtnsState(value);
-
     answers[currentQuestion] = {
       question: getQuestion(),
       value, 
     };
 
-    updateProgressBar();
+    nextQuestion();
   });
 });
 

@@ -98,12 +98,6 @@ button:hover {
   gap: 15px;
 }
 
-/* .bt-container {
-display:inline-flex;
-margin: 10px;
-cursor: pointer;
-
-} */
 .bt-container a button {
   background-color: white;
   color: #534200;
@@ -197,7 +191,7 @@ cursor: pointer;
   margin-bottom: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
+  
   
 }
 
@@ -279,38 +273,38 @@ footer {
 /* Layout Responsivo */
 @media (max-width: 768px) {
   header h1 {
-      font-size: 2rem;
+    font-size: 2rem;
   }
   .container {
     flex-direction: column;
     width: 100%;
-}
-#questionnaire{
-  padding: 10px;
-}
+  }
+  #questionnaire{
+    padding: 10px;
+  }
   h2 {
-      font-size: 1rem;
+    font-size: 1rem;
   }
   footer{
     padding: 10px;
   }
   button {
-      font-size: 1rem;
-      padding: 10px 20px;
+    font-size: 1rem;
+    padding: 10px 20px;
   }
   .images {
     flex-direction: column; /* Empilha as imagens verticalmente em telas menores */
-}
-
-.images img {
+  }
+  
+  .images img {
     width: 100%; /* Cada imagem ocupa toda a largura do container */
-}
-#identification-form {
-  width: 90%;
-}
-#highlights .highlight-box {
-  flex-direction: column;
-  gap: 10px;
-}
-       
+  }
+  #identification-form {
+    width: 90%;
+  }
+  #highlights .highlight-box {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
 }
