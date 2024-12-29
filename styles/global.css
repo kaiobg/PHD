@@ -37,7 +37,53 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Rodapé */
+footer {
+  background-color: #534200;
+  color: var(--white-color);
+  padding: 5px;
+  text-align: center;
   
+  /* margin-top: 40px; */
+}
+/* Cabeçalho  */
+.cabecalho {
+  /* background-color: #534200; */
+  padding: 5px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow-x: auto;
+}
+
+.cabecalho_menu {
+  max-width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto; 
+  
+}
+
+.cabecalho_link {
+  font-size: 20px;
+  padding: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-weight: bold;
+  color: white;   
+  flex-shrink: 0;  
+  text-decoration: none; 
+}
+
+.cabecalho_link:hover {
+  background-color: #534200;
+  border-radius: 2px;
 }
 
 .container {
@@ -51,9 +97,9 @@ body {
 }
 /* Header #3f51b5 */
 header {
-  background: linear-gradient(185deg, #534200, #cdd3d5);
+  background: linear-gradient(180deg, #534200, #cdd3d5);
   color: var(--black-color);
-  padding: 60px 20px;
+  padding: 10px 0px;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -68,6 +114,8 @@ header p {
   font-size: 1.2rem;
   font-style: italic;
 }
+
+
 /* Botão CTA */
 
 
@@ -98,10 +146,14 @@ button:hover {
   gap: 15px;
 }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 .bt-container a button {
-  background-color: white;
-  color: #534200;
-  border: 2px solid white;
+  background-color: #534200;
+  color: white;
+  border: 1px solid white;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 1rem;
@@ -110,13 +162,16 @@ button:hover {
 }
 
 .bt-container a button:hover {
-  background-color: #534200;
-  color: white;
+  background-color: #ffffff;
+  color: black;
+  border: 1px solid black;
 }
 
 .main {
-  flex: 2;
-  min-width: 300px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* position: relative; */
 }
 
 .main .post {
@@ -261,15 +316,7 @@ button:hover {
 #identification-form button:hover {
   background-color: #218838;
 }
-/* Rodapé */
-footer {
-  background-color: #534200;
-  color: var(--white-color);
-  padding: 5px;
-  text-align: center;
-  position: relative;
-  /* margin-top: 40px; */
-}
+
 /* Layout Responsivo */
 @media (max-width: 768px) {
   header h1 {
