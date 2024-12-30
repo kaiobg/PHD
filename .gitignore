@@ -31,8 +31,6 @@ dist-ssr
 *.local
 *.log
 /.vscode/
-/docs/.vitepress/cache
-/packages/vite/LICENSE
 dist
 dist-ssr
 explorations

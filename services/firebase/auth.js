@@ -62,7 +62,7 @@ export const checkAuthState = () => {
       console.log('user is signed in');
 
       if (document.body.hasAttribute('data-redirect-if-logged-in')) {
-        window.location = '/home/';
+        window.location = '/';
         return;
       }
 
@@ -98,7 +98,7 @@ export const checkAuthState = () => {
     console.log('user is not signed in');
 
     if (document.body.hasAttribute('data-redirect-if-not-logged-in')) {
-      window.location = '/home/';
+      window.location = '/';
       return;
     }
 

@@ -1,3 +1,8 @@
+import '../styles/global.css'; // DO NOT REMOVE THIS
+import '../styles/signup.css'; // DO NOT REMOVE THIS
+
+import './main'; // DO NOT REMOVE THIS
+
 import { firebaseService, notification } from '../services';
 
 const onSubmitForm = async (e) => {

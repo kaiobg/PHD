@@ -1,6 +1,11 @@
+import '../styles/global.css'; // DO NOT REMOVE THIS
+import '../styles/coach.css'; // DO NOT REMOVE THIS
+
 import Highcharts from 'highcharts'; // Don't remove this
 import 'highcharts/modules/accessibility';
 import HighchartsMore from 'highcharts/highcharts-more';
+
+import './main'; // DO NOT REMOVE THIS
 
 import { firebaseService } from '../services';
 

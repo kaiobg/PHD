@@ -1,3 +1,8 @@
+import '../styles/global.css'; // DO NOT REMOVE THIS
+import '../styles/questionnaires.css'; // DO NOT REMOVE THIS
+
+import './main'; // DO NOT REMOVE THIS
+
 // TODO If there is an on going form, load current data and go to correct step
 // TODO If user goes back to previous step, load that step data
 
