@@ -2,10 +2,7 @@
 .display-none { 
   display: none;
   visibility: hidden;
-}
-
-.visibility-hidden {
-  visibility: hidden;
+  position: absolute !important;
 }
 /* END DO NOT REMOVE THIS CLASS */
 
@@ -21,6 +18,10 @@
   --white-color: #fff;
   --font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
   Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+  --attitude: blue;
+  --interpersonal-relationship: yellow;
+  --emotional-regulation: red;
 }
 
 

@@ -16,19 +16,19 @@
     
     <div class="steps">
         <hr class="steps-divisor" />
-        <div class="step done">
+        <div class="step attitude done">
             <div class="step-circle">
                 <span class="step-number">1</span>
             </div>
             <span class="step-title">Atitude</span>
         </div>
-        <div class="step done">
+        <div class="step interpersonal-relationship done">
             <div class="step-circle">
                 <span class="step-number">2</span>
             </div>
             <span class="step-title">Relação Interpessoal</span>
         </div>
-        <div class="step current">
+        <div class="step emotional-regulation current">
             <div class="step-circle">
                 <span class="step-number">3</span>
             </div>
@@ -38,6 +38,8 @@
 
     <div class="container">
         <div class="quiz-container">
+            <h1 id="form-title" class="display-none">Regulação Emocional</h1>
+            
             <div class="progress-bar">
                 <span></span>
             </div>
@@ -63,9 +65,14 @@
             </ul>
 
             <div class="bt-container">
-                <button id="btn-previous-question" class="visibility-hidden">Pergunta anterior</button>
-                <button id="btn-next-question" disabled>Próxima pergunta</button>
-                <button id="btn-end-form" class="display-none">Enviar respostas</button>
+                <div>
+                    <button id="btn-previous-form" class="display-none">Passo anterior</button>
+                    <button id="btn-previous-question" class="display-none">Pergunta anterior</button>
+                </div>
+                <div>
+                    <button id="btn-next-question" disabled>Próxima pergunta</button>
+                    <button id="btn-end-form" class="display-none">Enviar respostas</button>
+                </div>
             </div> 
         </div>
     </div>
