@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "webpack --watch --mode development",
+    "dev": "webpack --devtool source-map --watch --mode development",
     "server": "webpack-dev-server --config webpack.config.cjs",
     "build": "webpack --mode production"
   },
