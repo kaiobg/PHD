@@ -4,6 +4,12 @@ export const FORMS = Object.freeze({
   EMOTIONAL_REGULATION: 'emotional_regulation',
 });
 
+export const FORMS_PASCAL_CASE = Object.freeze({
+  [FORMS.ATTITUDE]: 'Attitude',
+  [FORMS.INTERPERSONAL_RELATIONSHIP]: 'InterpersonalRelationship',
+  [FORMS.EMOTIONAL_REGULATION]: 'EmotionalRegulation',
+});
+
 export const QUESTIONNAIRES_CATEGORIES = Object.freeze({
   // Attitude
   ORGANIZATIONAL_MANAGEMENT: 'organizational_management',
@@ -12,7 +18,7 @@ export const QUESTIONNAIRES_CATEGORIES = Object.freeze({
   COMMUNICATION: 'communication',
   COACH_ATHLETE_RELATIONSHIP: 'coach_athlete_relationship',
   LEADERSHIP: 'leadership',
-  // Emotional Regulation  
+  // Emotional Regulation
   RESILIENCE: 'resilience',
   STRESS: 'stress',
   POSITIVE_MENTAL_HEALTH: 'positive_mental_health',
@@ -29,12 +35,17 @@ export const QUESTIONS = Object.freeze({
     {
       category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
       text: 'Enunciado questão 1-2',
-      invert: false,
+      invert: true,
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
       text: 'Enunciado questão 1-3',
       invert: false,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
+      text: 'Enunciado questão 1-4',
+      invert: true,
     },
   ],
   [FORMS.INTERPERSONAL_RELATIONSHIP]: [

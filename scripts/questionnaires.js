@@ -8,7 +8,8 @@ import './main'; // DO NOT REMOVE THIS
 
 import { utils } from '../utils';
 
-import { COACH_PAGE, FORMS, NEXT_PAGE, PREVIOUS_PAGE, QUESTIONS } from './constants';
+import { COACH_PAGE, FORMS, FORMS_PASCAL_CASE, NEXT_PAGE, PREVIOUS_PAGE, QUESTIONS } from './constants';
+import { firebaseService } from '../services';
 
 const questionEl = document.querySelector('#question');
 const questionOptionsEls = document.querySelectorAll('#question-options button');
@@ -27,6 +28,12 @@ const answers = [];
 
 const pageUrl = new URL(window.location.href);
 const isSingleForm = pageUrl.searchParams.get('single') == 'true';
+
+firebaseService.auth.addAuthStateListener(async (user) => {
+  if(user) {
+    // await firebaseService.form.getFormFromUserAttitude();
+  }
+});
 
 if(isSingleForm) {
   document.querySelector('.steps').classList.add('display-none');
@@ -101,13 +108,59 @@ const nextQuestion = (event) => {
   updateQuestionLayout();
 };
 
-const sendForm = () => {
+const sendForm = async () => {
   // TODO Save values here
   // Use mocked data for now
-  
+
+  const now = (new Date()).toISOString();
+
+  const categoriesValues = answers.reduce((acc, cur) => {
+    const { question, value } = cur;
+    const invertedValue = question.invert ? utils.invertLikertScaleValue(value) : value;
+    const realValue = invertedValue * 2;
+
+    const curSum = acc[question.category]?.sum ?? 0;
+    const curQty = acc[question.category]?.qty ?? 0;
+
+    const totalSum = curSum + realValue;
+    const totalQuestions = curQty + 1;
+
+    return {
+      ...acc,
+      [question.category]: {
+        sum: totalSum,
+        qty: totalQuestions,
+        avg: totalSum / totalQuestions,
+      },
+    };
+  }, {});
+
+  const normalizedValues = Object.keys(categoriesValues).reduce((acc, cur) => {
+    return {
+      ...acc,
+      [cur]: categoriesValues[cur].avg,
+    };
+  }, { 
+    created_at: now,
+  });
+
+  let isSaveOk = false;
+
+  if(isSingleForm) {
+    // Save data to user and to general forms keys
+    isSaveOk = await firebaseService.form[`saveFormForUser${FORMS_PASCAL_CASE[currentForm]}`](normalizedValues);
+    isSaveOk = isSaveOk && await firebaseService.form[`saveFormForAverage${FORMS_PASCAL_CASE[currentForm]}`](normalizedValues);
+  } else {
+    // Save current answers to save, to load back if necessary until user finish
+    console.log(answers);
+    isSaveOk = await firebaseService.form[`saveAnswersForUser${FORMS_PASCAL_CASE[currentForm]}`](answers);
+  }
+
+  console.log(isSaveOk);
+
   // Go to next form
-  const nextUrl = isSingleForm ? COACH_PAGE : NEXT_PAGE[currentForm];
-  window.location = nextUrl;
+  // const nextUrl = isSingleForm ? COACH_PAGE : NEXT_PAGE[currentForm];
+  // window.location = nextUrl;
 };
 
 const updateBtnsState = (selected = null) => {

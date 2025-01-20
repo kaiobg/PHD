@@ -13,6 +13,10 @@ import { firebaseService, notification } from '../../services';
 
 const auth = getAuth(app);
 
+export const getCurrentUser = async () => {
+  return await auth.currentUser;
+};
+
 export const signUp = async (email, password) => {
   try {
     const { user } = await createUserWithEmailAndPassword(
@@ -70,28 +74,6 @@ export const checkAuthState = () => {
         await firebaseService.user.loginUser(user.uid);
       }
 
-      document.querySelectorAll('[data-replace]').forEach((e) => {
-        let data = '';
-
-        switch (e.dataset.replace) {
-          case 'user-name':
-            data = firebaseService.user.getUserData('name');
-            break;
-        }
-
-        e.innerText = data;
-      });
-
-      document
-        .querySelectorAll('[data-visibility="not-logged"]')
-        .forEach((e) => {
-          e.classList.add('display-none');
-        });
-
-      document.querySelectorAll('[data-visibility="logged"]').forEach((e) => {
-        e.classList.remove('display-none');
-      });
-
       return;
     }
 
@@ -101,13 +83,9 @@ export const checkAuthState = () => {
       window.location = '/';
       return;
     }
-
-    document.querySelectorAll('[data-visibility="not-logged"]').forEach((e) => {
-      e.classList.remove('display-none');
-    });
-
-    document.querySelectorAll('[data-visibility="logged"]').forEach((e) => {
-      e.classList.add('display-none');
-    });
   });
+};
+
+export const addAuthStateListener = (listener) => {
+  onAuthStateChanged(auth, listener);
 };
