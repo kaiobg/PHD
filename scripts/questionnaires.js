@@ -3,13 +3,12 @@ import '../styles/questionnaires.css'; // DO NOT REMOVE THIS
 
 import './main'; // DO NOT REMOVE THIS
 
-// TODO If there is an on going form, load current data and go to correct step
-// TODO If user goes back to previous step, load that step data
+// TODO Add load to project
 
 import { utils } from '../utils';
 
 import { COACH_PAGE, FORMS, FORMS_PASCAL_CASE, NEXT_PAGE, PREVIOUS_PAGE, QUESTIONS } from './constants';
-import { firebaseService } from '../services';
+import { firebaseService, notification } from '../services';
 
 const questionEl = document.querySelector('#question');
 const questionOptionsEls = document.querySelectorAll('#question-options button');
@@ -24,14 +23,20 @@ const questions = QUESTIONS[currentForm];
 const lastQuestion = questions.length - 1;
 let currentQuestion = 0;
 
-const answers = [];
+let answers = [];
 
 const pageUrl = new URL(window.location.href);
 const isSingleForm = pageUrl.searchParams.get('single') == 'true';
 
 firebaseService.auth.addAuthStateListener(async (user) => {
   if(user) {
-    // await firebaseService.form.getFormFromUserAttitude();
+    const savedAnswer = await firebaseService.form.getFormFromUser(currentForm);
+
+    if(savedAnswer) {
+      answers = savedAnswer;
+      currentQuestion = answers.length - 1;
+      updateQuestionLayout();
+    }
   }
 });
 
@@ -109,9 +114,6 @@ const nextQuestion = (event) => {
 };
 
 const sendForm = async () => {
-  // TODO Save values here
-  // Use mocked data for now
-
   const now = (new Date()).toISOString();
 
   const categoriesValues = answers.reduce((acc, cur) => {
@@ -148,19 +150,26 @@ const sendForm = async () => {
 
   if(isSingleForm) {
     // Save data to user and to general forms keys
-    isSaveOk = await firebaseService.form[`saveFormForUser${FORMS_PASCAL_CASE[currentForm]}`](normalizedValues);
-    isSaveOk = isSaveOk && await firebaseService.form[`saveFormForAverage${FORMS_PASCAL_CASE[currentForm]}`](normalizedValues);
+    isSaveOk = await firebaseService.form.saveFormForUser(currentForm, normalizedValues);
+    isSaveOk = isSaveOk && await firebaseService.form.saveGeneralForm(currentForm, normalizedValues);
   } else {
-    // Save current answers to save, to load back if necessary until user finish
-    console.log(answers);
-    isSaveOk = await firebaseService.form[`saveAnswersForUser${FORMS_PASCAL_CASE[currentForm]}`](answers);
+    if(currentForm == FORMS.EMOTIONAL_REGULATION) {
+      // Save all data in correct keys
+      isSaveOk = await firebaseService.form.saveAllForms(currentForm, normalizedValues);
+    } else {
+      // Save current answers to save, to load back if necessary until user finish
+      isSaveOk = await firebaseService.form.saveTempFormForUser(currentForm, normalizedValues);
+      isSaveOk = isSaveOk && await firebaseService.form.saveAnswersForUser(currentForm, answers);
+    }
   }
 
-  console.log(isSaveOk);
-
-  // Go to next form
-  // const nextUrl = isSingleForm ? COACH_PAGE : NEXT_PAGE[currentForm];
-  // window.location = nextUrl;
+  if(isSaveOk) {
+    // Go to next form
+    const nextUrl = isSingleForm ? COACH_PAGE : NEXT_PAGE[currentForm];
+    window.location = nextUrl;
+  } else {
+    notification.error('Algo deu errado, por favor, tente mais tarde');
+  }
 };
 
 const updateBtnsState = (selected = null) => {

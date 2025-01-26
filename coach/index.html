@@ -25,9 +25,7 @@
         <div class="main">
             <section id="first-access" class="display-none">
                 <div class="bt-container">
-                    <a href="/questionnaires/attitude/">
-                        <button>Responder questionários</button>
-                    </a>
+                    <button id="btn-all-forms">Responder questionários</button>
                 </div>
             </section>
             
@@ -44,9 +42,21 @@
                         <button>Regulação Emocional</button>
                     </a>
                 </div>
+
+                <figure class="highcharts-figure">
+                    <div id="general-chart-container"></div>
+                </figure>
                 
                 <figure class="highcharts-figure">
-                    <div id="chart-container"></div>
+                    <div id="attitude-chart-container"></div>
+                </figure>
+
+                <figure class="highcharts-figure">
+                    <div id="interpersonal-relationship-chart-container"></div>
+                </figure>
+
+                <figure class="highcharts-figure">
+                    <div id="emotional-regulation-chart-container"></div>
                 </figure>
             </section>
         </div>

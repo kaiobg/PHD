@@ -25,6 +25,21 @@ export const QUESTIONNAIRES_CATEGORIES = Object.freeze({
   SELF_CONFIDENCE_AND_SELF_EFFICACY: 'self_confidence_and_self_efficacy',
 });
 
+export const CATEGORIES_NAME_MAPPER = Object.freeze({
+  // Attitude
+  [QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT]: 'Gestão organizational',
+  [QUESTIONNAIRES_CATEGORIES.DECISION_MAKING]: 'Tomada de decisão',
+  // Interpersonal Relationship
+  [QUESTIONNAIRES_CATEGORIES.COMMUNICATION]: 'Comunicação',
+  [QUESTIONNAIRES_CATEGORIES.COACH_ATHLETE_RELATIONSHIP]: 'Relação treinador-aluno',
+  [QUESTIONNAIRES_CATEGORIES.LEADERSHIP]: 'Liderança',
+  // Emotional Regulation
+  [QUESTIONNAIRES_CATEGORIES.RESILIENCE]: 'Resiliência',
+  [QUESTIONNAIRES_CATEGORIES.STRESS]: 'Estresse',
+  [QUESTIONNAIRES_CATEGORIES.POSITIVE_MENTAL_HEALTH]: 'Saúde mental positiva',
+  [QUESTIONNAIRES_CATEGORIES.SELF_CONFIDENCE_AND_SELF_EFFICACY]: 'Autoconfiança e autoeficácia',
+});
+
 export const QUESTIONS = Object.freeze({
   [FORMS.ATTITUDE]: [
     {

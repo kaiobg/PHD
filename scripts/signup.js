@@ -73,32 +73,4 @@ const onSubmitForm = async (e) => {
     window.location = "/coach/";
 };
 
-
 document.querySelector("#identification-form").addEventListener("submit",onSubmitForm);
-
-
-
-
-
-// const getPoke = async () => {
-//     const nomePoke = document.querySelector("#pokemon").value
-
-    
-//     try{
-//         const requestInfo =await fetch (
-//             'https://pokeapi.co/api/v2/pokemon/'+ nomePoke,
-//         );
-//         const data = await requestInfo.json();
-
-//         console.log(data) ;
-//     } catch (error) {
-//         console.error (error);
-//     }
-// };
-
-
-// (async () =>{
-//     const pokemon = await getPoke();
-//     console.log (pokemon);
-// }
-// )();
