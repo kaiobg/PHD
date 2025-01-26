@@ -13,18 +13,12 @@
 <body data-redirect-if-not-logged-in>
     
     <header>
-        <h1>Bem Vindo (a), Treinadores (as)</h1>
+        <h1>Bem Vindo(a), <span id="coach-name"></span></h1>
         <div class="cabecalho">
             <nav class="cabecalho_menu">
-              
-         <a href="/">
-                <button onclick="history.back()">Sair</button>
-            </a>  
-          </nav>
+                <button id="logout-btn">Sair</button>    
+            </nav>
         </div>
-        <!-- <div class="bt-container">
-            
-        </div>  -->
     </header>
     
     <div class="container">
@@ -49,21 +43,23 @@
                     </a>
                 </div>
 
-                <figure class="highcharts-figure">
-                    <div id="general-chart-container"></div>
-                </figure>
-                
-                <figure class="highcharts-figure">
-                    <div id="attitude-chart-container"></div>
-                </figure>
-
-                <figure class="highcharts-figure">
-                    <div id="interpersonal-relationship-chart-container"></div>
-                </figure>
-
-                <figure class="highcharts-figure">
-                    <div id="emotional-regulation-chart-container"></div>
-                </figure>
+                <div class="charts-container">
+                    <figure class="highcharts-figure">
+                        <div id="general-chart-container"></div>
+                    </figure>
+                    
+                    <figure class="highcharts-figure">
+                        <div id="attitude-chart-container"></div>
+                    </figure>
+    
+                    <figure class="highcharts-figure">
+                        <div id="interpersonal-relationship-chart-container"></div>
+                    </figure>
+    
+                    <figure class="highcharts-figure">
+                        <div id="emotional-regulation-chart-container"></div>
+                    </figure>
+                </div>
             </section>
         </div>
     </div>
