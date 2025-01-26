@@ -202,13 +202,21 @@ const initBarChat = (graph, data) => {
       '{point.y:,.2f}</b><br/>'
     },
     plotOptions: {
-        bar: {
-            borderRadius: '50%',
-            dataLabels: {
-                enabled: true
-            },
-            groupPadding: 0.1
+      bar: {
+          borderRadius: '50%',
+          dataLabels: {
+              enabled: true
+          },
+          groupPadding: 0.1,
+      },
+      series: {
+        dataLabels: {
+          enabled: true,
+          formatter: function () {
+            return Highcharts.numberFormat(this.y, 2);
+          }
         }
+      }
     },
     legend: {
       align: 'center',
