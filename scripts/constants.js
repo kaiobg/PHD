@@ -27,7 +27,7 @@ export const QUESTIONNAIRES_CATEGORIES = Object.freeze({
 
 export const CATEGORIES_NAME_MAPPER = Object.freeze({
   // Attitude
-  [QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT]: 'Gestão organizational',
+  [QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT]: 'Gestão organizacional',
   [QUESTIONNAIRES_CATEGORIES.DECISION_MAKING]: 'Tomada de decisão',
   // Interpersonal Relationship
   [QUESTIONNAIRES_CATEGORIES.COMMUNICATION]: 'Comunicação',

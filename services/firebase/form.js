@@ -197,7 +197,7 @@ export const getGeneralFormCategoriesAverage = async (form) => {
       const docData = doc.data();
       const keys = Object.keys(docData);
       const categories = keys.reduce((accKeys, curKey) => {
-        if(!Object.values(QUESTIONNAIRES_CATEGORIES).includes(curKey)) {
+        if(![...Object.values(QUESTIONNAIRES_CATEGORIES), 'general'].includes(curKey)) {
           return accKeys;
         }
 

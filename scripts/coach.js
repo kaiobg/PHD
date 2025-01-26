@@ -29,11 +29,12 @@ document.querySelector('#btn-all-forms').addEventListener('click', async () => {
   window.location = `/questionnaires/${currentStep}/`;
 });
 
-const getFormData = async (form, addFakeCategory = false) => {
+const getFormData = async (form) => {
   const userResultSnap = await firebaseService.form.getUserLatestResult(form);
-  const userResult = userResultSnap.empty ? null : userResultSnap.data();
+  const { general: generalUserResult, ...userResultNormalized } = userResultSnap.empty ? null : userResultSnap.data();
   const formAvg = await firebaseService.form.getGeneralFormCategoriesAverage(form);
-  const categoriesData = Object.keys(formAvg).reduce((acc, cur) => {
+  const { general, ...normalizedFormAvg } = formAvg;
+  const categoriesData = Object.keys(normalizedFormAvg).reduce((acc, cur) => {
     return {
       ...acc,
       keys: [
@@ -46,17 +47,17 @@ const getFormData = async (form, addFakeCategory = false) => {
       ],
       avgs: [
         ...acc.avgs,
-        formAvg[cur].avg,
+        normalizedFormAvg[cur].avg,
       ],
     };
   }, { 
-    keys: addFakeCategory ? [''] : [],
-    names: addFakeCategory ? [''] : [],
-    avgs: addFakeCategory ? [] : [],
+    keys: [],
+    names: [],
+    avgs: [],
   });
 
   const series = categoriesData.keys.reduce((acc, cur) => {
-    const categoryAverage = formAvg[cur]?.avg;
+    const categoryAverage = normalizedFormAvg[cur]?.avg;
     const hasCategoryAvg = categoryAverage != null;
 
     return [
@@ -66,40 +67,30 @@ const getFormData = async (form, addFakeCategory = false) => {
           ...(acc[0]?.data || []),
           categoryAverage || 0,
         ],
-        pointPlacement: 'on',
       },
       {
         name: 'Sua Nota',
         data: [
           ...(acc[1]?.data || []),
-          hasCategoryAvg ? userResult[cur] : 0,
+          hasCategoryAvg ? userResultNormalized[cur] : 0,
         ],
-        pointPlacement: 'on',
       },
     ];
   }, []);
 
-  const userFormAvg = Object.keys(userResult).reduce((acc, key) => {
-    if(!Object.values(QUESTIONNAIRES_CATEGORIES).includes(key)) {
-      return acc;
-    }
-    return acc + userResult[key];
-  }, 0) / Object.values(userResult).length;
-
   return {
     categories: categoriesData.names,
     series,
-    userResult,
     formAvg: {
-      general: categoriesData.avgs.reduce((acc, cur) => acc + cur) / categoriesData.avgs.length,
-      user: userFormAvg,
+      general: general.avg,
+      user: generalUserResult,
     },
   };
 };
 
-const initGraph = (graph, data) => {
+const initPolarChart = (graph, data) => {
+  // Example: https://www.highcharts.com/demo/highcharts/polar-spider
   const { title, categories, series } = data;
-   // Example: https://www.highcharts.com/demo/highcharts/polar-spider
 
    HighchartsMore.chart(graph, {
     
@@ -135,7 +126,7 @@ const initGraph = (graph, data) => {
     tooltip: {
       shared: true,
       pointFormat: '<span style="color:{series.color}">{series.name}: <b>' +
-      '{point.y}</b><br/>'
+      '{point.y:,.2f}</b><br/>'
     },
     
     legend: {
@@ -144,12 +135,15 @@ const initGraph = (graph, data) => {
       layout: 'horizontal'
     },
     
-    series,
+    series: series.map(serie => ({
+      ...serie, 
+      pointPlacement: 'on',
+    })),
     
     responsive: {
       rules: [{
         condition: {
-          maxWidth: 500
+          maxWidth: 400
         },
         chartOptions: {
           title: {
@@ -169,11 +163,75 @@ const initGraph = (graph, data) => {
   });  
 };
 
+const initBarChat = (graph, data) => {
+  // Example: https://www.highcharts.com/demo/highcharts/bar-chart
+  const { title, categories, series } = data;
+
+  Highcharts.chart(graph, {
+    chart: {
+        type: 'bar'
+    },
+    accessibility: {
+      description: 'Gráfico com a comparação dos seus resultado com a média das pessoas',
+    },
+    title: {
+        text: title,
+    },
+    xAxis: {
+        categories,
+        title: {
+            text: null
+        },
+        gridLineWidth: 1,
+        lineWidth: 0
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Resultados',
+            align: 'high'
+        },
+        labels: {
+            overflow: 'justify'
+        },
+        gridLineWidth: 0
+    },
+    tooltip: {
+        valueSuffix: ' millions'
+    },
+    plotOptions: {
+        bar: {
+            borderRadius: '50%',
+            dataLabels: {
+                enabled: true
+            },
+            groupPadding: 0.1
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: 80,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor:
+            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+        shadow: true
+    },
+    credits: {
+        enabled: false
+    },
+    series,
+  });
+};
+
 const initAttitudeGraph = async () => {
-  const { categories, series, formAvg } = await getFormData(FORMS.ATTITUDE, true);
+  const { categories, series, formAvg } = await getFormData(FORMS.ATTITUDE);
   const title = 'Atitude';
 
-  initGraph('attitude-chart-container', {
+  initBarChat('attitude-chart-container', {
     title,
     categories,
     series,
@@ -186,10 +244,10 @@ const initAttitudeGraph = async () => {
 };
 
 const initInterpersonalRelationshipGraph = async () => {
-  const { categories, series, formAvg } = await getFormData(FORMS.INTERPERSONAL_RELATIONSHIP, true);
+  const { categories, series, formAvg } = await getFormData(FORMS.INTERPERSONAL_RELATIONSHIP);
   const title = 'Relação Interpessoal';
 
-  initGraph('interpersonal-relationship-chart-container', {
+  initPolarChart('interpersonal-relationship-chart-container', {
     title,
     categories,
     series,
@@ -202,10 +260,10 @@ const initInterpersonalRelationshipGraph = async () => {
 };
 
 const initEmotionalRegulationGraph = async () => {
-  const { categories, series, formAvg } = await getFormData(FORMS.EMOTIONAL_REGULATION, true);
+  const { categories, series, formAvg } = await getFormData(FORMS.EMOTIONAL_REGULATION);
   const title = 'Regulação Emocional';
 
-  initGraph('emotional-regulation-chart-container', {
+  initPolarChart('emotional-regulation-chart-container', {
     title,
     categories,
     series,
@@ -220,6 +278,8 @@ const initEmotionalRegulationGraph = async () => {
 const initPage = async () => {
   const hasAnswerForAllForms = firebaseService.user.getUserData('hasAnswerForAllForms');
 
+  document.querySelector('#coach-name').innerText = firebaseService.user.getUserData('name');
+
   if(!hasAnswerForAllForms) {
     document.querySelector('#first-access').classList.remove('display-none');
     return;
@@ -227,8 +287,9 @@ const initPage = async () => {
 
   document.querySelector('#interface').classList.remove('display-none');
 
-  document.getElementById("logout-btn")?.addEventListener("click",()=>{
-    firebaseService.auth.signOut()
+  document.getElementById('logout-btn')?.addEventListener("click",async () => {
+    await firebaseService.auth.signOut();
+    window.location = '/';
   });
 
   const result = await Promise.all([
@@ -250,7 +311,6 @@ const initPage = async () => {
             ...(acc.series[0]?.data || []),
             cur.general,
           ],
-          pointPlacement: 'on',
         },
         {
           name: 'Sua Nota',
@@ -258,7 +318,6 @@ const initPage = async () => {
             ...(acc.series[1]?.data || []),
             cur.user,
           ],
-          pointPlacement: 'on',
         },
       ],
     };
@@ -267,7 +326,7 @@ const initPage = async () => {
     series: [],
   });
 
-  initGraph('general-chart-container', {
+  initPolarChart('general-chart-container', {
     title: 'Geral',
     categories: normalizedResult.categories,
     series: normalizedResult.series,

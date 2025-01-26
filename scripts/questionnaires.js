@@ -4,6 +4,8 @@ import '../styles/questionnaires.css'; // DO NOT REMOVE THIS
 import './main'; // DO NOT REMOVE THIS
 
 // TODO Add load to project
+// TODO Conseguir comparar a média por Gênero / Modalidade / tempo de experiência (Colocar checkboxes pra pessoa conseguir selecionar)
+// TODO Já colocar o bloqueio para não responder várias vezes
 
 import { utils } from '../utils';
 
@@ -127,8 +129,18 @@ const sendForm = async () => {
     const totalSum = curSum + realValue;
     const totalQuestions = curQty + 1;
 
+    const generalSum = acc.general?.sum ?? 0;
+    const generalQty = acc.general?.qty ?? 0;
+    const generalTotalSum = generalSum + realValue;
+    const generalTotalQuestions = generalQty + 1;
+
     return {
       ...acc,
+      general: {
+        sum: generalTotalSum,
+        qty: generalTotalQuestions,
+        avg: generalTotalSum / generalTotalQuestions,
+      },
       [question.category]: {
         sum: totalSum,
         qty: totalQuestions,
