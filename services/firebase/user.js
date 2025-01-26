@@ -5,7 +5,7 @@ import { notification } from '../notification';
 import { app } from './firebase-app';
 
 import { firebaseService } from './index';
-import { DATABASE_KEYS, FORMS_QTY } from './constants';
+import { DATABASE_KEYS } from './constants';
 
 const db = getFirestore(app);
 
@@ -28,10 +28,28 @@ export const addUser = async (data) => {
 };
 
 export const hasAnswerForAllForms = async (uid) => {
-  const collectionRef = collection(db, DATABASE_KEYS.USERS, uid, DATABASE_KEYS.FORMS);
-  const docsSnap = await getDocs(collectionRef);
+  const atRef = collection(db, DATABASE_KEYS.USERS, uid, DATABASE_KEYS.ATTITUDE);
+  const atDocs = await getDocs(atRef);
 
-  return docsSnap.docs.length == FORMS_QTY;
+  if (atDocs.empty) {
+    return false;
+  }
+
+  const erRef = collection(db, DATABASE_KEYS.USERS, uid, DATABASE_KEYS.EMOTIONAL_REGULATION);
+  const erDocs = await getDocs(erRef);
+
+  if (erDocs.empty) {
+    return false;
+  }
+
+  const irRef = collection(db, DATABASE_KEYS.USERS, uid, DATABASE_KEYS.INTERPERSONAL_RELATIONSHIP);
+  const irDocs = await getDocs(irRef);
+
+  if (irDocs.empty) {
+    return false;
+  }
+
+  return true;
 };
 
 export const loginUser = async (uid) => {
@@ -65,5 +83,17 @@ export const hasUserData = () => {
 export const getUserData = (key) => {
   const userData = JSON.parse(sessionStorage.getItem(USER_SESSION_KEY));
   
-  return userData[key];
+  return userData ? userData[key] : null;
+};
+
+export const setUserData = (key, value) => {
+  const userData = JSON.parse(sessionStorage.getItem(USER_SESSION_KEY));
+
+  if(!userData) {
+    return;
+  }
+
+  userData[key] = value;
+
+  sessionStorage.setItem(USER_SESSION_KEY, JSON.stringify(userData));
 };

@@ -8,52 +8,112 @@ import HighchartsMore from 'highcharts/highcharts-more';
 import './main'; // DO NOT REMOVE THIS
 
 import { firebaseService } from '../services';
+import { CATEGORIES_NAME_MAPPER, FORMS, QUESTIONNAIRES_CATEGORIES } from './constants';
 
-(async () => {
-  const hasAnswerForAllForms = firebaseService.user.getUserData('hasAnswerForAllForms');
+document.querySelector('#btn-all-forms').addEventListener('click', async () => {
+  const step = await firebaseService.form.getUserCurrentFormStep();
+  let currentStep = '';
 
-  if(!hasAnswerForAllForms) {
-    document.querySelector('#first-access').classList.remove('display-none');
-    return;
+  switch(step) {
+    case 1:
+      currentStep = FORMS.INTERPERSONAL_RELATIONSHIP;
+      break;
+    case 2:
+      currentStep = FORMS.EMOTIONAL_REGULATION;
+      break;
+    default:
+      currentStep = FORMS.ATTITUDE;
+      break;
   }
 
-  document.querySelector('#interface').classList.remove('display-none');
+  window.location = `/questionnaires/${currentStep}/`;
+});
 
-  document.getElementById("logout-btn")?.addEventListener("click",()=>{
-    firebaseService.auth.signOut()
+const getFormData = async (form, addFakeCategory = false) => {
+  const userResultSnap = await firebaseService.form.getUserLatestResult(form);
+  const userResult = userResultSnap.empty ? null : userResultSnap.data();
+  const formAvg = await firebaseService.form.getGeneralFormCategoriesAverage(form);
+  const categoriesData = Object.keys(formAvg).reduce((acc, cur) => {
+    return {
+      ...acc,
+      keys: [
+        ...acc.keys,
+        cur,
+      ],
+      names: [
+        ...acc.names,
+        CATEGORIES_NAME_MAPPER[cur],
+      ],
+      avgs: [
+        ...acc.avgs,
+        formAvg[cur].avg,
+      ],
+    };
+  }, { 
+    keys: addFakeCategory ? [''] : [],
+    names: addFakeCategory ? [''] : [],
+    avgs: addFakeCategory ? [] : [],
   });
 
-  // Example: https://www.highcharts.com/demo/highcharts/polar-spider
+  const series = categoriesData.keys.reduce((acc, cur) => {
+    const categoryAverage = formAvg[cur]?.avg;
+    const hasCategoryAvg = categoryAverage != null;
 
-  HighchartsMore.chart('chart-container', {
+    return [
+      {
+        name: 'Média Geral',
+        data: [
+          ...(acc[0]?.data || []),
+          categoryAverage || 0,
+        ],
+        pointPlacement: 'on',
+      },
+      {
+        name: 'Sua Nota',
+        data: [
+          ...(acc[1]?.data || []),
+          hasCategoryAvg ? userResult[cur] : 0,
+        ],
+        pointPlacement: 'on',
+      },
+    ];
+  }, []);
+
+  const userFormAvg = Object.keys(userResult).reduce((acc, key) => {
+    if(!Object.values(QUESTIONNAIRES_CATEGORIES).includes(key)) {
+      return acc;
+    }
+    return acc + userResult[key];
+  }, 0) / Object.values(userResult).length;
+
+  return {
+    categories: categoriesData.names,
+    series,
+    userResult,
+    formAvg: {
+      general: categoriesData.avgs.reduce((acc, cur) => acc + cur) / categoriesData.avgs.length,
+      user: userFormAvg,
+    },
+  };
+};
+
+const initGraph = (graph, data) => {
+  const { title, categories, series } = data;
+   // Example: https://www.highcharts.com/demo/highcharts/polar-spider
+
+   HighchartsMore.chart(graph, {
     
     chart: {
       polar: true,
     },
     
     accessibility: {
-      description: 'A spiderweb chart compares the allocated budget ' +
-      'against actual spending within an organization. The spider ' +
-      'chart has six spokes. Each spoke represents one of the 6 ' +
-      'departments within the organization: sales, marketing, ' +
-      'development, customer support, information technology and ' +
-      'administration. The chart is interactive, and each data point ' +
-      'is displayed upon hovering. The chart clearly shows that 4 of ' +
-      'the 6 departments have overspent their budget with Marketing ' +
-      'responsible for the greatest overspend of $20,000. The ' +
-      'allocated budget and actual spending data points for each ' +
-      'department are as follows: Sales. Budget equals $43,000; ' +
-      'spending equals $50,000. Marketing. Budget equals $19,000; ' +
-      'spending equals $39,000. Development. Budget equals $60,000; ' +
-      'spending equals $42,000. Customer support. Budget equals $35,' +
-      '000; spending equals $31,000. Information technology. Budget ' +
-      'equals $17,000; spending equals $26,000. Administration. Budget ' +
-      'equals $10,000; spending equals $14,000.'
+      description: 'Gráfico com a comparação dos seus resultado com a média das pessoas',
     },
     
     title: {
-      text: 'Budget vs spending',
-      x: -80
+      text: title,
+      x: 0,
     },
     
     pane: {
@@ -61,10 +121,7 @@ import { firebaseService } from '../services';
     },
     
     xAxis: {
-      categories: [
-        'Sales', 'Marketing', 'Development', 'Customer Support',
-        'Information Technology', 'Administration'
-      ],
+      categories,
       tickmarkPlacement: 'on',
       lineWidth: 0
     },
@@ -78,7 +135,7 @@ import { firebaseService } from '../services';
     tooltip: {
       shared: true,
       pointFormat: '<span style="color:{series.color}">{series.name}: <b>' +
-      '${point.y:,.0f}</b><br/>'
+      '{point.y}</b><br/>'
     },
     
     legend: {
@@ -87,17 +144,7 @@ import { firebaseService } from '../services';
       layout: 'horizontal'
     },
     
-    series: [
-      {
-        name: 'Allocated Budget',
-        data: [43000, 19000, 60000, 35000, 17000, 10000],
-        pointPlacement: 'on'
-      }, {
-        name: 'Actual Spending',
-        data: [50000, 39000, 42000, 31000, 26000, 14000],
-        pointPlacement: 'on'
-      }
-    ],
+    series,
     
     responsive: {
       rules: [{
@@ -119,6 +166,121 @@ import { firebaseService } from '../services';
         }
       }],
     },  
+  });  
+};
+
+const initAttitudeGraph = async () => {
+  const { categories, series, formAvg } = await getFormData(FORMS.ATTITUDE, true);
+  const title = 'Atitude';
+
+  initGraph('attitude-chart-container', {
+    title,
+    categories,
+    series,
   });
 
-})();
+  return {
+    title,
+    ...formAvg,
+  };
+};
+
+const initInterpersonalRelationshipGraph = async () => {
+  const { categories, series, formAvg } = await getFormData(FORMS.INTERPERSONAL_RELATIONSHIP, true);
+  const title = 'Relação Interpessoal';
+
+  initGraph('interpersonal-relationship-chart-container', {
+    title,
+    categories,
+    series,
+  });
+
+  return {
+    title,
+    ...formAvg,
+  };
+};
+
+const initEmotionalRegulationGraph = async () => {
+  const { categories, series, formAvg } = await getFormData(FORMS.EMOTIONAL_REGULATION, true);
+  const title = 'Regulação Emocional';
+
+  initGraph('emotional-regulation-chart-container', {
+    title,
+    categories,
+    series,
+  });
+
+  return {
+    title,
+    ...formAvg,
+  };
+};
+
+const initPage = async () => {
+  const hasAnswerForAllForms = firebaseService.user.getUserData('hasAnswerForAllForms');
+
+  if(!hasAnswerForAllForms) {
+    document.querySelector('#first-access').classList.remove('display-none');
+    return;
+  }
+
+  document.querySelector('#interface').classList.remove('display-none');
+
+  document.getElementById("logout-btn")?.addEventListener("click",()=>{
+    firebaseService.auth.signOut()
+  });
+
+  const result = await Promise.all([
+    initAttitudeGraph(),
+    initInterpersonalRelationshipGraph(),
+    initEmotionalRegulationGraph(),
+  ]);
+
+  const normalizedResult = result.reduce((acc, cur) => {
+    return {
+      categories: [
+        ...acc.categories,
+        cur.title,
+      ],
+      series: [
+        {
+          name: 'Média Geral',
+          data: [
+            ...(acc.series[0]?.data || []),
+            cur.general,
+          ],
+          pointPlacement: 'on',
+        },
+        {
+          name: 'Sua Nota',
+          data: [
+            ...(acc.series[1]?.data || []),
+            cur.user,
+          ],
+          pointPlacement: 'on',
+        },
+      ],
+    };
+  }, {
+    categories: [],
+    series: [],
+  });
+
+  initGraph('general-chart-container', {
+    title: 'Geral',
+    categories: normalizedResult.categories,
+    series: normalizedResult.series,
+  });
+};
+
+firebaseService.auth.addAuthStateListener(async (user) => {
+  if(user) {
+    const waitLoadUserData = setInterval(() => {
+      if(firebaseService.user.hasUserData()) {
+        clearInterval(waitLoadUserData);
+        initPage();
+      }
+    }, 100);
+  }
+});

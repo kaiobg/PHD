@@ -1,25 +1,41 @@
-import { doc, setDoc, getFirestore, collection, addDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getFirestore, collection, addDoc, getDoc, getDocs, writeBatch, deleteField, updateDoc, query, orderBy, limit } from 'firebase/firestore';
 
 import { app } from './firebase-app';
 
 import { firebaseService } from './index';
-import { DATABASE_KEYS } from './constants';
+import { CONVERT_DATABASE_KEY_TO_FORM, CONVERT_TEMP_KEY_TO_PERMANENT_KEY_MAPPER, DATABASE_KEYS, FORM_MAPPER, TEMP_FORM_MAPPER } from './constants';
+import { QUESTIONNAIRES_CATEGORIES } from '../../scripts/constants';
 
 const db = getFirestore(app);
 
-// TODO functions related to user inside USER key, should be handled in user service
-
-const getFormFromUser = async (form) => {
+export const getUserCurrentFormStep = async () => {
   try {
     const { uid } = await firebaseService.auth.getCurrentUser();
 
-    const docRef = doc(db, DATABASE_KEYS.USERS, uid, DATABASE_KEYS.FORMS, form);
+    const collectionRef = collection(db, DATABASE_KEYS.USERS, uid, DATABASE_KEYS.ANSWER);
+    const docsSnap = await getDocs(collectionRef);
+
+    return docsSnap.docs.length;
+  } catch(error) {
+    console.error(error);
+  }
+
+  return 0;
+};
+
+export const getFormFromUser = async (currentForm) => {
+  const form = FORM_MAPPER[currentForm];
+
+  try {
+    const { uid } = await firebaseService.auth.getCurrentUser();
+
+    const docRef = doc(db, DATABASE_KEYS.USERS, uid, DATABASE_KEYS.ANSWER, form);
     const docSnap = await getDoc(docRef);
 
     if(docSnap.exists()) {
       const formData = docSnap.data();
 
-      console.log(formData);
+      return formData.data;
     }
   } catch(error) {
     console.error(error);
@@ -28,25 +44,20 @@ const getFormFromUser = async (form) => {
   return null;
 };
 
-export const getFormFromUserAttitude = async () => {
-  return await getFormFromUser(DATABASE_KEYS.ATTITUDE);
-};
+export const saveTempFormForUser = async (currentForm, data) => {
+  const form = TEMP_FORM_MAPPER[currentForm];
 
-export const getFormFromUserInterpersonalRelationship = async () => {
-  return await getFormFromUser(DATABASE_KEYS.INTERPERSONAL_RELATIONSHIP);
-};
-
-export const getFormFromUserEmotionalRegulation = async () => {
-  return await getFormFromUser(DATABASE_KEYS.EMOTIONAL_REGULATION);
-};
-
-const saveFormForUser = async (form, data) => {
   try {
     const { uid } = await firebaseService.auth.getCurrentUser();
 
     await setDoc(
-      doc(db, DATABASE_KEYS.USERS, uid, DATABASE_KEYS.FORMS, form),
-      data,
+      doc(db, DATABASE_KEYS.USERS, uid),
+      {
+        [form]: data,
+      },
+      {
+        merge: true,
+      }
     );
 
     return true;
@@ -57,25 +68,102 @@ const saveFormForUser = async (form, data) => {
   return false;
 };
 
-export const saveFormForUserAttitude = async (data) => {
-  return await saveFormForUser(DATABASE_KEYS.ATTITUDE, data);
+export const saveAllForms = async (currentForm, data) => {
+  const form = FORM_MAPPER[currentForm];
+
+  try {
+    const { uid } = await firebaseService.auth.getCurrentUser();
+
+    const docRef = doc(db, DATABASE_KEYS.USERS, uid);
+    const docSnap = await getDoc(docRef);
+
+    if(docSnap.exists()) {
+      // Save all data
+      const userData = await docSnap.data();
+
+      const updatedUserData = Object.keys(userData).reduce((acc, cur) => {
+        const permanentKey = CONVERT_TEMP_KEY_TO_PERMANENT_KEY_MAPPER[cur];
+
+        if(!permanentKey) {
+          return acc;
+        }
+
+        return {
+          ...acc,
+          [permanentKey]: userData[cur],
+        };
+      }, {
+        [form]: data,
+      });
+
+      Object.keys(updatedUserData).forEach(async key => {
+        await addDoc(
+          collection(db, DATABASE_KEYS.USERS, uid, key), 
+          updatedUserData[key],
+        );
+
+        saveGeneralForm(CONVERT_DATABASE_KEY_TO_FORM[key], updatedUserData[key]);
+      });
+
+      // Delete temp data
+      await updateDoc(docRef, {
+        [DATABASE_KEYS.TEMP_ATTITUDE]: deleteField(),
+        [DATABASE_KEYS.TEMP_INTERPERSONAL_RELATIONSHIP]: deleteField(),
+        [DATABASE_KEYS.TEMP_EMOTIONAL_REGULATION]: deleteField(),
+      });
+
+      const batch = writeBatch(db);
+
+      const answersRef = collection(db, DATABASE_KEYS.USERS, uid, DATABASE_KEYS.ANSWER);
+      const answersSnapshot = await getDocs(answersRef);
+
+      answersSnapshot.docs.forEach((doc) => {
+        batch.delete(doc.ref);
+      });
+
+      await batch.commit();
+
+      firebaseService.user.setUserData('hasAnswerForAllForms', true);
+
+      return true;
+    }
+  } catch(error) {
+    console.error(error);
+  }
+
+  return false;
 };
 
-export const saveFormForUserInterpersonalRelationship = async (data) => {
-  return await saveFormForUser(DATABASE_KEYS.INTERPERSONAL_RELATIONSHIP, data);
+export const saveFormForUser = async (currentForm, data) => {
+  const form = FORM_MAPPER[currentForm];
+
+  try {
+    const { uid } = await firebaseService.auth.getCurrentUser();
+
+    await addDoc(
+      collection(db, DATABASE_KEYS.USERS, uid, form), 
+      data
+    );
+
+    return true;
+  } catch(error) {
+    console.error(error);
+  }
+
+  return false;
 };
 
-export const saveFormForUserEmotionalRegulation = async (data) => {
-  return await saveFormForUser(DATABASE_KEYS.EMOTIONAL_REGULATION, data);
-};
+export const saveAnswersForUser = async (currentForm, data) => {
+  const form = FORM_MAPPER[currentForm];
 
-const saveAnswersForUser = async (form, data) => {
   try {
     const { uid } = await firebaseService.auth.getCurrentUser();
 
     await setDoc(
       doc(db, DATABASE_KEYS.USERS, uid, DATABASE_KEYS.ANSWER, form),
-      data,
+      {
+        data: data,
+      },
     );
 
     return true;
@@ -86,19 +174,9 @@ const saveAnswersForUser = async (form, data) => {
   return false;
 };
 
-export const saveAnswersForUserAttitude = async (data) => {
-  return await saveAnswersForUser(DATABASE_KEYS.ATTITUDE, data);
-};
+export const saveGeneralForm = async (currentForm, data) => {
+  const form = FORM_MAPPER[currentForm];
 
-export const saveAnswersForUserInterpersonalRelationship = async (data) => {
-  return await saveAnswersForUser(DATABASE_KEYS.INTERPERSONAL_RELATIONSHIP, data);
-};
-
-export const saveAnswersForUserEmotionalRegulation = async (data) => {
-  return await saveAnswersForUser(DATABASE_KEYS.EMOTIONAL_REGULATION, data);
-};
-
-const saveFormForAverage = async (form, data) => {
   try {
     await addDoc(collection(db, form), data);
 
@@ -110,14 +188,60 @@ const saveFormForAverage = async (form, data) => {
   return false;
 };
 
-export const saveFormForAverageAttitude = async (data) => {
-  return await saveFormForAverage(DATABASE_KEYS.FORM_ATTITUDE, data);
+export const getGeneralFormCategoriesAverage = async (form) => {
+  try {
+    const collectionRef = collection(db, form);
+    const docsSnap = await getDocs(collectionRef);
+
+    const avg = docsSnap.docs.reduce((acc, doc) => {
+      const docData = doc.data();
+      const keys = Object.keys(docData);
+      const categories = keys.reduce((accKeys, curKey) => {
+        if(!Object.values(QUESTIONNAIRES_CATEGORIES).includes(curKey)) {
+          return accKeys;
+        }
+
+        const totalSum = (acc[curKey]?.sum || 0) + docData[curKey];
+        const totalCount = (acc[curKey]?.count || 0) + 1;
+        
+        return {
+          ...accKeys,
+          [curKey]: {
+            sum: totalSum,
+            count: totalCount,
+            avg: totalSum / totalCount,
+          },
+        };
+      }, {});
+
+      return {
+        ...acc,
+        ...categories,
+      };
+    }, {});
+
+    return avg;
+  } catch(error) {
+    console.error(error);
+  }
+
+  return null;
 };
 
-export const saveFormForAverageInterpersonalRelationship = async (data) => {
-  return await saveFormForAverage(DATABASE_KEYS.FORM_INTERPERSONAL_RELATIONSHIP, data);
-};
+export const getUserLatestResult = async (form) => {
+  try {
+    const { uid } = await firebaseService.auth.getCurrentUser();
 
-export const saveFormForAverageEmotionalRegulation = async (data) => {
-  return await saveFormForAverage(DATABASE_KEYS.FORM_EMOTIONAL_REGULATION, data);
+    const collectionRef = collection(db, DATABASE_KEYS.USERS, uid, form);
+    const q = query(collectionRef, orderBy('created_at', 'desc'), limit(1));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      return querySnapshot.docs[0];
+    }
+  } catch(error) {
+    console.error(error);
+  }
+
+  return null;
 };
