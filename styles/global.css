@@ -13,7 +13,7 @@
   --third-color:#722f37;
   --forth-color:#0b0b0b;
   --quinth-color:#534200;
-  --background-color: #f4f4f4;
+  --background-color: #eaf19889;
   --text-color: #000000;
   --white-color: #fff;
   --font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -45,9 +45,9 @@ body {
 
 /* Rodapé */
 footer {
-  background-color: #534200;
+  background: linear-gradient(180deg, #eaf19889,#998123, #534200);
   color: var(--white-color);
-  padding: 5px;
+  padding: 10px;
   text-align: center;
   
   /* margin-top: 40px; */
@@ -66,7 +66,7 @@ footer {
   max-width: 50%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin: auto; 
   
 }
@@ -77,7 +77,7 @@ footer {
   padding-top: 12px;
   padding-bottom: 12px;
   font-weight: bold;
-  color: white;   
+  color: black;   
   flex-shrink: 0;  
   text-decoration: none; 
 }
@@ -85,6 +85,7 @@ footer {
 .cabecalho_link:hover {
   background-color: #534200;
   border-radius: 2px;
+  color: white;
 }
 
 .container {
@@ -98,11 +99,12 @@ footer {
 }
 /* Header #3f51b5 */
 header {
-  background: linear-gradient(180deg, #534200, #cdd3d5);
+  background: linear-gradient(180deg, #534200,#ab9e68, #eaf19889);
   color: var(--black-color);
   padding: 10px 0px;
   margin-bottom: 20px;
   text-align: center;
+
 }
 
 header h1 {
@@ -173,7 +175,7 @@ button:hover {
 }
 
 .main .post {
-  background-color: #fff;
+  background-color: #ffffffcb;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -194,7 +196,7 @@ button:hover {
 }
 
 .sidebar .box {
-  background-color: #fff;
+  background-color: #ffffffcb;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -240,7 +242,7 @@ button:hover {
 #questionnaire {
   padding: 40px ;
   text-align: center;
-  background-color: #fff;
+  background-color: #ffffffcb;
   margin-bottom: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -320,6 +322,7 @@ button:hover {
   header h1 {
     font-size: 2rem;
   }
+  
   .container {
     flex-direction: column;
     width: 100%;

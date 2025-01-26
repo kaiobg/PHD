@@ -13,7 +13,16 @@
 <body data-redirect-if-not-logged-in>
 
     <input type="hidden" id="current-form" value="emotional_regulation" />
-    
+    <header>
+        <h1>Mental Coach</h1>
+        <!--  -->
+        <nav class="cabecalho_menu">
+              
+            <a href="/">
+                   <button onclick="history.back()">Sair</button>
+               </a>  
+             </nav>
+    </header>
     <div class="steps">
         <hr class="steps-divisor" />
         <div class="step attitude done">
@@ -44,7 +53,7 @@
                 <span></span>
             </div>
 
-            <div id="question"></div>
+            <div class="questao" id="question"></div>
             
             <ul id="question-options" class="options">
                 <li>
@@ -77,7 +86,7 @@
         </div>
     </div>
     <footer>
-        <p> PTPT | Desenvolvido por Kaio Borges Guerrero</p>
+        <p> Mental Coach | Desenvolvido por Kaio Guerrero</p>
     </footer>
 </body>
 </html>
