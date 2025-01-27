@@ -43,25 +43,106 @@ export const CATEGORIES_NAME_MAPPER = Object.freeze({
 export const QUESTIONS = Object.freeze({
   [FORMS.ATTITUDE]: [
     {
-      category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
-      text: 'Enunciado questão 1-1',
+      category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
+      text: 'Durante as competições, consigo equilibrar as emoções ao tomar decisões importantes.',
       invert: false,
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
-      text: 'Enunciado questão 1-2',
+      text: 'Encontro dificuldades para lidar com demandas dos familiares dos atletas.',
       invert: true,
     },
     {
-      category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
-      text: 'Enunciado questão 1-3',
+      category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
+      text: 'Mantenho uma comunicação ativa e positiva com dirigentes e equipe administrativa. ',
       invert: false,
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
-      text: 'Enunciado questão 1-4',
+      text: 'Tomo decisões confiando no feedback direto dos atletas e da equipe técnica. ',
+      invert: false,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
+      text: 'Falta confiança em minha capacidade de mediar conflitos com equipe administrativa ou familiares. ',
       invert: true,
     },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
+      text: 'Planejo minhas decisões do dia a dia com base em objetivos de longo prazo. ',
+      invert: false,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
+      text: 'Busco resolver problemas com os árbitros de forma profissional e sem perder o controle. ',
+      invert: false,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
+      text: 'Sinto dificuldade em tomar decisões sob pressão de resultados. ',
+      invert: true,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
+      text: 'É importante construir um bom diálogo com os árbitros para reduzir conflitos.',
+      invert: false,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
+      text: 'Tomo decisões rapidamente em situações de pressão durante os jogos. ',
+      invert: false,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
+      text: 'Relações interpessoais fora da quadra são desgastantes para meu trabalho.  ',
+      invert: true,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
+      text: 'Minhas decisões consideram sempre o impacto no desenvolvimento dos atletas. ',
+      invert: false,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
+      text: 'O entendimento entre familiares, atletas e treinador é essencial para alcançar os objetivos do time. ',
+      invert: false,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
+      text: 'Sempre evito conflitos desnecessários com gestores e equipes administrativas. ',
+      invert: false,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
+      text: 'Muitas vezes sinto insegurança ao decidir durante situações críticas. ',
+      invert: true,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
+      text: 'As decisões no treino são baseadas em uma análise cuidadosa do desempenho anterior.',
+      invert: false,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
+      text: 'Mantenho um relacionamento respeitoso com os familiares dos atletas. ',
+      invert: false,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
+      text: 'Levo em consideração a opinião de familiares dos atletas e equipes administrativas para tomar minha decisão no planejamento de treino.  ',
+      invert: true,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
+      text: 'Mantenho uma postura colaborativa com gestores para organizar competições.  ',
+      invert: false,
+    },
+    {
+      category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
+      text: 'As decisões durante os jogos são frequentemente influenciadas pela experiência prévia. ',
+      invert: false,
+    },
+
   ],
   [FORMS.INTERPERSONAL_RELATIONSHIP]: [
     {

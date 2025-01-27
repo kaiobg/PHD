@@ -50,6 +50,7 @@ footer {
   padding: 10px;
   text-align: center;
   
+  
   /* margin-top: 40px; */
 }
 /* Cabeçalho  */
@@ -118,6 +119,16 @@ header p {
   font-style: italic;
 }
 
+.image-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
 /* Botão CTA */
 
@@ -324,7 +335,7 @@ button:hover {
   }
   
   .container {
-    flex-direction: column;
+    flex-direction: column-reverse;/*inverte as colunas na página inicial*/
     width: 100%;
   }
   #questionnaire{
