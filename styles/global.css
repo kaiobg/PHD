@@ -42,7 +42,10 @@ body {
   display: flex;
   flex-direction: column;
 }
-
+.coach-mentoria{
+  align-items: center;
+  text-align: center;
+}
 /* Rodapé */
 footer {
   background: linear-gradient(180deg, #eaf19889,#998123, #534200);
