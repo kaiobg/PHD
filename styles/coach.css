@@ -5,3 +5,6 @@
 .main {
   max-width: 100%;
 }
+.container{
+  min-height: 450px;
+}
