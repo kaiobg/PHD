@@ -15,7 +15,7 @@ const onSubmitForm = async (e) => {
   const user = await firebaseService.auth.signIn(email, password);
 
   if(user) {
-    window.location = '/coach/';
+    window.location = `${BASE_URL}/coach/`;
   }
 };
 

@@ -62,18 +62,30 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'coach/index.html'),
           to: path.resolve(__dirname, 'dist/coach/'),
+          transform(content) {
+            return content.toString().replace(/__BASE_URL__/g, process.env.BASE_URL || "/");
+          },
         },
         {
           from: path.resolve(__dirname, 'login/index.html'),
           to: path.resolve(__dirname, 'dist/login/'),
+          transform(content) {
+            return content.toString().replace(/__BASE_URL__/g, process.env.BASE_URL || "/");
+          },
         },
         {
           from: path.resolve(__dirname, 'questionnaires/'),
           to: path.resolve(__dirname, 'dist/questionnaires/'),
+          transform(content) {
+            return content.toString().replace(/__BASE_URL__/g, process.env.BASE_URL || "/");
+          },
         },
         {
           from: path.resolve(__dirname, 'signup/index.html'),
           to: path.resolve(__dirname, 'dist/signup/'),
+          transform(content) {
+            return content.toString().replace(/__BASE_URL__/g, process.env.BASE_URL || "/");
+          },
         },
       ],
     }),

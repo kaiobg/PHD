@@ -92,7 +92,7 @@ const previousForm = () => {
     return;
   }
 
-  window.location = PREVIOUS_PAGE[currentForm];
+  window.location = `${BASE_URL}/${PREVIOUS_PAGE[currentForm]}`;
 };
 
 const previousQuestion = () => {
@@ -177,7 +177,7 @@ const sendForm = async () => {
 
   if(isSaveOk) {
     // Go to next form
-    const nextUrl = isSingleForm ? COACH_PAGE : NEXT_PAGE[currentForm];
+    const nextUrl = isSingleForm ? `${BASE_URL}/${COACH_PAGE}` : `${BASE_URL}/${NEXT_PAGE[currentForm]}`;
     window.location = nextUrl;
   } else {
     notification.error('Algo deu errado, por favor, tente mais tarde');

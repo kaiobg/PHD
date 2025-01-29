@@ -26,7 +26,7 @@ document.querySelector('#btn-all-forms').addEventListener('click', async () => {
       break;
   }
 
-  window.location = `/questionnaires/${currentStep}/`;
+  window.location = `${BASE_URL}/questionnaires/${currentStep}/`;
 });
 
 const getFormData = async (form) => {
@@ -292,7 +292,7 @@ const initPage = async () => {
 
   document.getElementById('logout-btn')?.addEventListener("click",async () => {
     await firebaseService.auth.signOut();
-    window.location = '/';
+    window.location = `${BASE_URL}/`;
   });
 
   const result = await Promise.all([
