@@ -1,6 +1,7 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -39,6 +40,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      BASE_URL: JSON.stringify(process.env.BASE_URL || '/'), 
+    }),
     new MiniCssExtractPlugin({
       filename: '[name]/[name].css',
     }),
@@ -51,6 +55,9 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'home/index.html'),
           to: path.resolve(__dirname, 'dist'),
+          transform(content) {
+            return content.toString().replace(/__BASE_URL__/g, process.env.BASE_URL || "/");
+          },
         },
         {
           from: path.resolve(__dirname, 'coach/index.html'),
