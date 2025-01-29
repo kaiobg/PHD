@@ -7,7 +7,7 @@
     "dev": "webpack --devtool source-map --watch --mode development",
     "server": "webpack-dev-server --config webpack.config.cjs",
     "build": "webpack --mode production",
-    "deploy": "cross-env BASE_URL='/test-treinamental' npm run build && gh-pages --dist dist --repo https://github.com/nathipg/test-treinamental.git"
+    "deploy": "cross-env BASE_URL='/neurotreino' npm run build && gh-pages --dist dist --repo https://github.com/kaiobg/neurotreino.git"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
