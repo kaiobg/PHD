@@ -48,32 +48,52 @@ module.exports = {
           from: path.resolve(__dirname, 'public'),
           to: path.resolve(__dirname, 'dist'),
         },
+        {
+          from: path.resolve(__dirname, 'home/index.html'),
+          to: path.resolve(__dirname, 'dist'),
+        },
+        {
+          from: path.resolve(__dirname, 'coach/index.html'),
+          to: path.resolve(__dirname, 'dist/coach/'),
+        },
+        {
+          from: path.resolve(__dirname, 'login/index.html'),
+          to: path.resolve(__dirname, 'dist/login/'),
+        },
+        {
+          from: path.resolve(__dirname, 'questionnaires/'),
+          to: path.resolve(__dirname, 'dist/questionnaires/'),
+        },
+        {
+          from: path.resolve(__dirname, 'signup/index.html'),
+          to: path.resolve(__dirname, 'dist/signup/'),
+        },
       ],
     }),
   ],
   devServer: {
-    static: [
-      {
-        directory: path.join(__dirname, 'home'),
-        publicPath: '/'
-      },
-      {
-        directory: path.join(__dirname, 'coach'),
-        publicPath: '/coach'
-      },
-      {
-        directory: path.join(__dirname, 'login'),
-        publicPath: '/login'
-      },
-      {
-        directory: path.join(__dirname, 'questionnaires'),
-        publicPath: '/questionnaires'
-      },
-      {
-        directory: path.join(__dirname, 'signup'),
-        publicPath: '/signup'
-      },
-    ],
+    // static: [
+    //   {
+    //     directory: path.join(__dirname, 'home'),
+    //     publicPath: '/'
+    //   },
+    //   {
+    //     directory: path.join(__dirname, 'coach'),
+    //     publicPath: '/coach'
+    //   },
+    //   {
+    //     directory: path.join(__dirname, 'login'),
+    //     publicPath: '/login'
+    //   },
+    //   {
+    //     directory: path.join(__dirname, 'questionnaires'),
+    //     publicPath: '/questionnaires'
+    //   },
+    //   {
+    //     directory: path.join(__dirname, 'signup'),
+    //     publicPath: '/signup'
+    //   },
+    // ],
     port: 3000,
     hot: true,
     open: true,
