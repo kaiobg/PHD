@@ -39,6 +39,8 @@ firebaseService.auth.addAuthStateListener(async (user) => {
       currentQuestion = answers.length - 1;
       updateQuestionLayout();
     }
+
+    utils.hideLoading();
   }
 });
 
@@ -116,6 +118,8 @@ const nextQuestion = (event) => {
 };
 
 const sendForm = async () => {
+  utils.showLoading();
+  
   const now = (new Date()).toISOString();
 
   const categoriesValues = answers.reduce((acc, cur) => {
@@ -181,6 +185,7 @@ const sendForm = async () => {
     window.location = nextUrl;
   } else {
     notification.error('Algo deu errado, por favor, tente mais tarde');
+    utils.hideLoading();
   }
 };
 

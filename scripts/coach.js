@@ -322,6 +322,8 @@ const initPage = async () => {
 
   document.querySelector('#interface').classList.remove('display-none');
 
+  utils.hideLoading();
+
   const normalizedResult = result.reduce((acc, cur) => {
     return {
       categories: [
