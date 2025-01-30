@@ -305,6 +305,7 @@ const initPage = async () => {
 
   if(!hasAnswerForAllForms) {
     document.querySelector('#first-access').classList.remove('display-none');
+    utils.hideLoading();
     return;
   }
 
