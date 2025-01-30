@@ -160,6 +160,10 @@ const sendForm = async () => {
     };
   }, { 
     created_at: now,
+    experience: firebaseService.user.getUserData('experience'),
+    formation: firebaseService.user.getUserData('formation'),
+    gender: firebaseService.user.getUserData('gender'),
+    modality: firebaseService.user.getUserData('modality'),
   });
 
   let isSaveOk = false;
