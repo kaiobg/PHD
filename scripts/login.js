@@ -4,6 +4,7 @@ import '../styles/login.css'; // DO NOT REMOVE THIS
 import './main'; // DO NOT REMOVE THIS
 
 import { firebaseService } from '../services';
+import { utils } from '../utils';
 
 const onSubmitForm = async (e) => {
   e.preventDefault();
@@ -20,3 +21,11 @@ const onSubmitForm = async (e) => {
 };
 
 document.querySelector('#identification-form').addEventListener('submit', onSubmitForm);
+
+firebaseService.auth.addAuthStateListener(async (user) => {
+  if(user) {
+    window.location = `${BASE_URL}coach/`;
+  }
+
+  utils.hideLoading();
+});

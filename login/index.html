@@ -1,65 +1,68 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    
     <title>Login</title>
-
+    
     <link rel="stylesheet" href="login.css" />
     
     <script type="module" src="login.js"></script>
-  </head>
-  <body>
+</head>
+<body>
     <header>
-      <h1>Neurotreino</h1>
-      <div class="cabecalho">
-      <nav class="cabecalho_menu">
-        <a class="cabecalho_link" href='__BASE_URL__'>Início</a>
-        <!-- <a class="cabecalho_link" href="/">Voltar</a> -->
-        <a class="cabecalho_link" href='__BASE_URL__signup/'>Crie sua conta</a>
-      
-   
-    </nav>
-  </div>
-      
-      
-  </header>
-  <div class="container">
-    <div class="main">
-  <section id="questionnaire" >
-    
-    <h1>Acesse sua conta</h1>
-    
-    <form id="identification-form" >
-       
-
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="password">Senha:</label>
-        <input type="password" id="senha" name="password"  placeholder="Mínimo de 6 caracteres" minlength="6" required>
-
+        <h1>Neurotreino</h1>
+        <div class="cabecalho">
+            <nav class="cabecalho_menu">
+                <a class="cabecalho_link" href='__BASE_URL__'>Início</a>
+                <!-- <a class="cabecalho_link" href="/">Voltar</a> -->
+                <a class="cabecalho_link" href='__BASE_URL__signup/'>Crie sua conta</a>
+                
+                
+            </nav>
+        </div>
         
         
-          <p> 
-          <a href="__BASE_URL__" style="padding-left: 10px;" target="_blank"> Esqueci minha senha</a></p>
-       
+    </header>
+    <div class="container">
+        <div class="main">
+            <section id="questionnaire" >
+                
+                <h1>Acesse sua conta</h1>
+                
+                <form id="identification-form" >
+                    
+                    
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="password">Senha:</label>
+                    <input type="password" id="senha" name="password"  placeholder="Mínimo de 6 caracteres" minlength="6" required>
+                    
+                    
+                    
+                    <p> 
+                        <a href="__BASE_URL__" style="padding-left: 10px;" target="_blank"> Esqueci minha senha</a></p>
+                        
+                        
+                        
+                        <button type="submit">Entrar</button>
+                    </form>
+                    
+                    
+                </section>
+            </div>
+        </div>
+        <footer>
+            <div class="rodape">
+                <p> Neurotreino | Desenvolvido por Kaio Guerrero</p>
+            </div>      
+        </footer>
 
-
-        <button type="submit">Entrar</button>
-    </form>
-
-    
-</section>
-    </div>
-  </div>
-  <footer>
-    <div class="rodape">
-      <p> Neurotreino | Desenvolvido por Kaio Guerrero</p>
-    </div>      
-  </footer>
-
+        <div id="loading" class="loading-state">
+            <div class="loading"></div>
+        </div>        
+    </body>
 </body>
-  </body>
 </html>

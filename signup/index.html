@@ -1,16 +1,16 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    
     <title>Signup</title>
-
+    
     <link rel="stylesheet" href="signup.css" />
     
     <script type="module" src="signup.js"></script>
-  </head>
-  <body>
+</head>
+<body>
     <header>
         <h1>Neurotreino</h1>
         <div class="cabecalho">
@@ -19,107 +19,111 @@
                 <a class="cabecalho_link" href="__BASE_URL__login/">Acesse sua conta</a>
             </nav>
         </div>
-  </header>
-  
-  <div class="container">
-    <div class="main">   
-  <section id="questionnaire" >  
-         <h1>Crie seu cadastro</h1>
-    <form id="identification-form" >
-        <label for="name">Nome Completo:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="age">Idade:</label>
-        <input type="number" id="age" name="age" required>
-
-        <label for="age">Data de nascimento:</label>
-        <input type="date" id="birth" name="birth" required>
-
-        <label for="gender">Gênero:</label>
-        <select id="gender" name="gender" required>
-            <option value="" disabled selected>Selecione</option>
-            <option value="masculino">Masculino</option>
-            <option value="feminino">Feminino</option>
-            <option value="outro">Outro</option>
-            <option value="nao-falx">Prefiro não dizer</option>
-        </select>
-
-        <label for="occupation">Modalidade esportiva principal:</label>
-        <select id="modality" name="modality" required>
-          <option value="" disabled selected>Selecione</option>
-          <option value="Atletismo">Atletismo</option>
-          <option value="Badminton">Badminton</option>
-          <option value="Basquete">Basquete</option>
-          <option value="Basquete">Beach Tênis</option>
-          <option value="Sports">E-Sports</option>
-          <option value="Futebol">Futebol</option>
-          <option value="Futebol">Futebol de 5</option>
-          <option value="Ginástica">Ginástica</option>
-          <option value="Ginástica">Goalball</option>
-          <option value="Handebol">Handebol</option>
-          <option value="Lutas">Lutas diversas</option>
-          <option value="Nado">Natação</option>
-          <option value="Rugby">Rugby</option>
-          <option value="Tenis">Tênis</option>
-          <option value="Mesa">Tênis de mesa</option>
-          <option value="volei">Vôlei</option>
-          <option value="praia">Vôlei de praia</option>
-          <option value="Xadrez">Xadrez</option>
-          <option value="outros">Outra modalidade</option>
-          
-      </select>
-
-        <label for="experience">Tempo de Experiência como treinador (a) nesta modalidade:</label>
-        <select id="experience" name="experience" required>
-          <option value="" disabled selected>Selecione</option>
-          <option value="1">Até 1 ano</option>
-          <option value="1-3">Entre 1 e 3 anos</option>
-          <option value="3-5">Entre 3 e 5 anos</option>
-          <option value="5-10">Entre 5 e 10 anos</option>
-          <option value="10-15">Entre 10 e 15 anos</option>
-          <option value="15">Acima de 15 anos</option>
-          
-      </select>
-
-        <label for="formation">Formação:</label>
-        <select id="formation" name="formation" required>
-            <option value="" disabled selected>Selecione</option>
-            <option value="em">Ensino médio completo</option>
-            <option value="gradc">Graduação em Educação Física completo</option>
-            <option value="gradin">Graduação em Educação Física incompleto</option>
-            <option value="esp">Especialização completa</option>
-            <option value="mest">Mestrado completo</option>
-            <option value="doc">Doutorado completo</option>
-            
-        </select>
-
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="password">Senha:</label>
-        <input type="password" id="senha" name="password"  placeholder="Mínimo de 6 caracteres" minlength="6" required>
-
-        <label for="password">Confirmar senha:</label>
-        <input type="password" id="confirmpassword" name="confirmpassword"  placeholder="Digite novamente sua senha" minlength="6" required>
-
-        
-        <label style="display: flex; margin-top: 20px; gap: 20px">
-          <input type="checkbox" id="tcle" name="tcle" required> 
-          <span>Li e aceito os <a href="../imgs/TCLE.pdf" style="padding-left: 10px;" target="_blank"> termos</a></span>
-        </label>
-
-
-        <button type="submit">Enviar</button>
-    </form>
-
+    </header>
     
-</section>
+    <div class="container">
+        <div class="main">   
+            <section id="questionnaire" >  
+                <h1>Crie seu cadastro</h1>
+                <form id="identification-form" >
+                    <label for="name">Nome Completo:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="age">Idade:</label>
+                    <input type="number" id="age" name="age" required>
+                    
+                    <label for="age">Data de nascimento:</label>
+                    <input type="date" id="birth" name="birth" required>
+                    
+                    <label for="gender">Gênero:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="" disabled selected>Selecione</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                        <option value="outro">Outro</option>
+                        <option value="nao-falx">Prefiro não dizer</option>
+                    </select>
+                    
+                    <label for="occupation">Modalidade esportiva principal:</label>
+                    <select id="modality" name="modality" required>
+                        <option value="" disabled selected>Selecione</option>
+                        <option value="Atletismo">Atletismo</option>
+                        <option value="Badminton">Badminton</option>
+                        <option value="Basquete">Basquete</option>
+                        <option value="Basquete">Beach Tênis</option>
+                        <option value="Sports">E-Sports</option>
+                        <option value="Futebol">Futebol</option>
+                        <option value="Futebol">Futebol de 5</option>
+                        <option value="Ginástica">Ginástica</option>
+                        <option value="Ginástica">Goalball</option>
+                        <option value="Handebol">Handebol</option>
+                        <option value="Lutas">Lutas diversas</option>
+                        <option value="Nado">Natação</option>
+                        <option value="Rugby">Rugby</option>
+                        <option value="Tenis">Tênis</option>
+                        <option value="Mesa">Tênis de mesa</option>
+                        <option value="volei">Vôlei</option>
+                        <option value="praia">Vôlei de praia</option>
+                        <option value="Xadrez">Xadrez</option>
+                        <option value="outros">Outra modalidade</option>
+                        
+                    </select>
+                    
+                    <label for="experience">Tempo de Experiência como treinador (a) nesta modalidade:</label>
+                    <select id="experience" name="experience" required>
+                        <option value="" disabled selected>Selecione</option>
+                        <option value="1">Até 1 ano</option>
+                        <option value="1-3">Entre 1 e 3 anos</option>
+                        <option value="3-5">Entre 3 e 5 anos</option>
+                        <option value="5-10">Entre 5 e 10 anos</option>
+                        <option value="10-15">Entre 10 e 15 anos</option>
+                        <option value="15">Acima de 15 anos</option>
+                        
+                    </select>
+                    
+                    <label for="formation">Formação:</label>
+                    <select id="formation" name="formation" required>
+                        <option value="" disabled selected>Selecione</option>
+                        <option value="em">Ensino médio completo</option>
+                        <option value="gradc">Graduação em Educação Física completo</option>
+                        <option value="gradin">Graduação em Educação Física incompleto</option>
+                        <option value="esp">Especialização completa</option>
+                        <option value="mest">Mestrado completo</option>
+                        <option value="doc">Doutorado completo</option>
+                        
+                    </select>
+                    
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="password">Senha:</label>
+                    <input type="password" id="senha" name="password"  placeholder="Mínimo de 6 caracteres" minlength="6" required>
+                    
+                    <label for="password">Confirmar senha:</label>
+                    <input type="password" id="confirmpassword" name="confirmpassword"  placeholder="Digite novamente sua senha" minlength="6" required>
+                    
+                    
+                    <label style="display: flex; margin-top: 20px; gap: 20px">
+                        <input type="checkbox" id="tcle" name="tcle" required> 
+                        <span>Li e aceito os <a href="../imgs/TCLE.pdf" style="padding-left: 10px;" target="_blank"> termos</a></span>
+                    </label>
+                    
+                    
+                    <button type="submit">Enviar</button>
+                </form>
+                
+                
+            </section>
+        </div>
     </div>
-    </div>
-  <footer>
-      <p> Neurotreino | Desenvolvido por Kaio Guerrero</p>
-  </footer>
+    <footer>
+        <p> Neurotreino | Desenvolvido por Kaio Guerrero</p>
+    </footer>
 
+    <div id="loading" class="loading-state">
+        <div class="loading"></div>
+    </div>
+    
 </body>
-  
+
 </html>
