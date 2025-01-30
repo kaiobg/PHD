@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Neurotreino</title>
+
+    <link rel="stylesheet" href="home/home.css" />
+    
+    <script type="module" src="home/home.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Neurotreino</h1>
+    </header>
+
+    <div class="container">
+        <div class="main">
+            <section  class="post">
+                <h2>O que vamos coletar?!</h2>
+                <div class="image-container">
+                    <img 
+                    src="imgs/map.png"
+                    style="width: 100%; height: auto;">
+                </div>
+            </section>
+            <div class="post">
+                <h2>Quer ajudar a ciência e ainda descobrir suas tendências psicológicas no esporte de forma gratuita?!</h2>
+                <p>Este projeto de doutorado investiga os principais aspectos psicológicos presentes em treinadores (as).
+                   Ao se cadastrar e responder os questionários, você saberá seus principais resultados em três vertentes diferentes
+                   (Atitude, Regulação emocional e Relação interpessoal). Poderá comparar com a média dos outros treinadores (as) e
+                   receber dicas de intervenções, além de apoio especializado para tirar suas dúvidas. Tudo de graça.
+                </p>
+            </div>
+           
+            
+            <section id="highlights" class="post">
+                <h1>Benefícios do Projeto</h1>
+                <div class="highlight-box">
+                    <div class="highlight sqr1">
+                        <h3>Conhecimento Avançado</h3>
+                        <p>Oferecemos uma análise detalhada de suas tendências psicológicas de forma gratuita. Basta responder os questionários.</p>
+                    </div>
+                    <div class="highlight sqr1">
+                        <h3 >Estratégias Práticas</h3>
+                        <p>Fornecemos as principais sugestões para melhorar os aspectos psicológicos defasados.</p>
+                    </div>
+                    <div class="highlight sqr1">
+                        <h3 >Apoio Profissional</h3>
+                        <p>Ao participar da pesquisa, você estará em contato com profissionais que possam tirar suas dúvidas.</p>
+                    </div>
+                </div>
+            </section>
+      
+        
+          <section id="highlights" class="post">
+            <h1>Principais dúvidas</h1>
+            <div class="highlight-box">
+                <div class="highlight sqr1">
+                    <h3>Quanto tempo demora?</h3>
+                    <p>Cerca de 10 minutos para responder os três questionários.</p>
+                </div>
+                <div class="highlight sqr1">
+                    <h3>Quando sai o resultado?</h3>
+                    <p>O resultado aparece na hora, basta finalizar todos os questionários.</p>
+                </div>
+                <div class="highlight sqr1">
+                    <h3>Posso fazer mais de uma vez?</h3>
+                    <p>Você poderá refazer os testes a cada 4 meses.</p>
+                </div>
+                <div class="highlight sqr1">
+                  <h3>Para que eu uso os resultados?</h3>
+                  <p>Com o resultado, poderá realizar intervenções para melhorar possíveis defasagens.
+                  </p>
+              </div>
+            </div>
+        </section>
+        
+          <section  class="post">
+              <h1>Por que Este Projeto é Importante?</h1>
+              <p>Você já se deparou com muitas pesquisas focadas no treinador ou treinadora? Eu aposto que não. 
+                Os (as) treinadores (as) desempenham um papel central no desenvolvimento dos atletas e alunos, 
+                tanto tecnicamente quanto mentalmente. 
+                Ao entender os perfis psicológicos, este projeto contribui diretamente para a melhoria 
+                da performance de atletas e equipes.</p>
+              <!-- <div class="bt-contato">
+                <a href="/login/">
+                    <button class="call">Entre em contato</button>
+                </a>
+                
+         </div> -->
+            </section>
+        </div>
+        <div class="sidebar">
+            <div class="box">
+                <h3>Acesse sua conta</h3>
+                <p>Você já sabe quais seus atributos psicológicos como treinador(a)?</p>
+                <div class="bt-container">
+                    <a href="/login/">
+                        <button>Entre na sua conta</button>
+                    </a>
+                    <a href="/signup/">
+                        <button>Crie uma conta</button>
+                    </a>
+                </div>
+            </div>
+              
+            <section  class="box">
+                <h2>O que é o Neurotreino</h2>
+                <div class="video-container">
+                    <iframe 
+                        width="560" 
+                        height="315" 
+                        src="imgs/video.mp4" 
+                        title="YouTube video player" 
+                        
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </section>
+            <!-- <div class="box">
+                <h3>Publicações em alta</h3>
+                <ul>
+                    <li><button>Como incorporar técnicas de mindfulness em um negócio próspero?</button></li>
+                    <li><button>Alguém mais notou uma onda de inspiração desde que iniciou a prática?</button></li>
+                    <li><button>Como você concilia a meditação diária com uma agenda agitada?</button></li>
+                </ul>
+                <div class="bt-contato">
+                    <a href="/login/">
+                        <button class="call">Outras publicações</button>
+                    </a>
+                    
+             </div>
+            </div> -->
+            <div class="box display-none">
+                <h3>Total de Treinadores (as) Cadastrados</h3>
+                <p id="user-counter">Carregando...</p>
+            </div>
+            <script>
+                // Simulação de contagem de usuários
+                const userCounter = document.getElementById('user-counter');
+                // Esta contagem deve ser substituída pelo valor dinâmico vindo do backend
+                const fakeUserCount = 12071993; 
+            
+                // Exibindo o valor no contador
+                userCounter.textContent = fakeUserCount + " usuários registrados!";
+            </script>
+        </div>
+    </div>
+    <footer>
+        <p> Neurotreino | Desenvolvido por Kaio Guerrero</p>
+    </footer>
+</body>
+</html>

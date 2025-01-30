@@ -1,0 +1,457 @@
+/* DO NOT REMOVE THIS CLASS */
+.display-none { 
+  display: none;
+  visibility: hidden;
+  position: absolute !important;
+}
+/* END DO NOT REMOVE THIS CLASS */
+
+/* Variáveis de Cores */
+:root {
+  --primary-color: #28a745;
+  --secondary-color: #3f51b5;
+  --third-color:#722f37;
+  --forth-color:#0b0b0b;
+  --quinth-color:#534200;
+  --background-color: #eaf19889;
+  --text-color: #000000;
+  --white-color: #fff;
+  --font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+  --attitude: blue;
+  --interpersonal-relationship: yellow;
+  --emotional-regulation: red;
+}
+
+
+
+/* Estilos Globais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.coach-mentoria{
+  align-items: center;
+  text-align: center;
+}
+/* Rodapé */
+footer {
+  background: linear-gradient(180deg, #eaf19889,#998123, #534200);
+  color: var(--white-color);
+  padding: 10px;
+  text-align: center;
+  
+  
+  /* margin-top: 40px; */
+}
+/* Cabeçalho  */
+.cabecalho {
+  /* background-color: #534200; */
+  padding: 5px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow-x: auto;
+}
+
+.cabecalho_menu {
+  max-width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto; 
+  
+}
+
+.cabecalho_link {
+  font-size: 20px;
+  padding: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-weight: bold;
+  color: black;   
+  flex-shrink: 0;  
+  text-decoration: none; 
+}
+
+.cabecalho_link:hover {
+  background-color: #534200;
+  border-radius: 2px;
+  color: white;
+}
+
+.container {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 20px;
+  padding: 0 20px;
+}
+/* Header #3f51b5 */
+header {
+  background: linear-gradient(180deg, #534200,#ab9e68, #eaf19889);
+  color: var(--black-color);
+  padding: 10px 0px;
+  margin-bottom: 20px;
+  text-align: center;
+
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+header p {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+.image-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Botão CTA */
+
+
+button {
+  background-color: var(--quinth-color);
+  margin-top: 10px;
+  color: var(--white-color);
+  padding: 12px 25px;
+  border: none;
+  border-radius: 1px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: auto;
+}
+button:hover {
+  background-color: #ffffff; /* cor mais escura no hover */
+  color:#0b0b0b;
+  font-size: 1.1rem;
+}
+
+.bt-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+
+.bt-container a button {
+  background-color: #534200;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.bt-container a button:hover {
+  background-color: #ffffff;
+  color: black;
+  border: 1px solid black;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* position: relative; */
+}
+
+.main .post {
+  background-color: #ffffffcb;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.main .post h2 {
+  margin: 0 0 15px;
+}
+
+.main .post p {
+  line-height: 1.6;
+}
+
+.sidebar {
+  flex: 1;
+  min-width: 250px;
+}
+
+.sidebar .box {
+  background-color: #ffffffcb;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.sidebar .box h3 {
+  margin: 0 0 15px;
+  color: #534200;
+}
+
+.sidebar .box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar .box ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar .box ul li:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar .box ul li button {
+  background-color: #f3f4f6;
+  border: 2px solid #534200;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  font-size: 0.9rem;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sidebar .box ul li button:hover {
+  background-color: #534200;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+#questionnaire {
+  padding: 40px ;
+  text-align: center;
+  background-color: #ffffffcb;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+  
+}
+
+#questionnaire h2 {
+  color: var(--secondary-color);
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+#questionnaire p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+/* Estilos do Formulário */
+#identification-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#identification-form label {
+  width: 100%;
+  font-size: 1rem;
+  text-align: left;
+  color: var(--secondary-color);
+  margin-bottom: 5px;
+}
+
+
+#identification-form input,
+#identification-form select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#identification-form input[type="checkbox"]{
+  width: 20px;
+}
+
+
+#identification-form input:focus,
+#identification-form select:focus {
+  border-color: var(--primary-color);
+}
+
+#identification-form button {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+#identification-form button:hover {
+  background-color: #218838;
+}
+
+/* Layout Responsivo */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+  
+  .container {
+    flex-direction: column-reverse;/*inverte as colunas na página inicial*/
+    width: 100%;
+  }
+  #questionnaire{
+    padding: 10px;
+  }
+  h2 {
+    font-size: 1rem;
+  }
+  footer{
+    padding: 10px;
+  }
+  button {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+  .images {
+    flex-direction: column; /* Empilha as imagens verticalmente em telas menores */
+  }
+  
+  .images img {
+    width: 100%; /* Cada imagem ocupa toda a largura do container */
+  }
+  #identification-form {
+    width: 90%;
+  }
+  #highlights .highlight-box {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+}
+
+/* Imagens lado a lado na seção "Sobre o Projeto" */
+.images {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Espaçamento entre as imagens */
+    margin-top: 20px;
+}
+
+.images img {
+    width: 48%; /* Cada imagem ocupa quase metade do container */
+    border-radius: 5px; /* Bordas arredondadas para estilo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para destaque */
+}
+.bt-contato a button {
+    background-color: #f3f4f6;
+    color: #534200;
+    border: 2px solid #534200;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .bt-contato a button:hover {
+    background-color: #534200;
+    color: white;
+  }
+  .bt-contato {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+.sqr1{
+    background-color: #f3f4f6;
+}
+        
+        /* Estilo para alinhar caixas lado a lado */
+.highlight-box {
+    display: flex;        /* Coloca os itens lado a lado */
+    flex-wrap: wrap;      /* Permite que as caixas se ajustem em várias linhas, se necessário */
+    gap: 16px;            /* Espaçamento entre as caixas */
+    justify-content: space-evenly; /* Espaço uniforme entre caixas */
+  }
+  
+  .highlight {
+    flex: 1;             /* Faz cada caixa crescer igualmente */
+    min-width: 250px;    /* Define uma largura mínima para manter a legibilidade */
+    max-width: 300px;    /* Limita a largura máxima de cada caixa */
+    padding: 20px;       /* Espaçamento interno */
+    border: 1px solid #ccc;
+    border-radius: 8px;  /* Cantos arredondados para um visual moderno */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Leve sombra */
+  }
+
+  .video-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f4f4f9; /* Cor de fundo suave */
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.video-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+iframe {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    iframe {
+        width: 100%;
+        height: auto;
+    }
+}
+ 

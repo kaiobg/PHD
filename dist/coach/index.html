@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Painel do Treinador</title>
+    
+    <link rel="stylesheet" href="coach.css" />
+    
+    <script type="module" src="coach.js"></script>
+</head>
+<body data-redirect-if-not-logged-in>
+    
+    <header>
+        <h1>Bem Vindo(a), <span id="coach-name"></span></h1>
+        <div class="cabecalho">
+            <nav class="cabecalho_menu">
+                <button id="logout-btn">Sair</button>    
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main">
+            <section id="first-access" class="display-none">
+                <div class="bt-container">
+                    <button id="btn-all-forms">Responder questionários</button>
+                </div>
+            </section>
+            
+            <section id="interface" class="display-none">
+                <div class="bt-container">
+                    
+                    <a href="/questionnaires/attitude?single=true">
+                        <button >Atitude</button>
+                    </a>
+                    <a href="/questionnaires/interpersonal_relationship?single=true">
+                        <button>Relação Interpessoal</button>
+                    </a>
+                    <a href="/questionnaires/emotional_regulation?single=true">
+                        <button>Regulação Emocional</button>
+                    </a>
+                </div>
+
+                <div class="charts-container">
+                    <figure class="highcharts-figure">
+                        <div id="general-chart-container"></div>
+                    </figure>
+                    
+                    <figure class="highcharts-figure">
+                        <div id="attitude-chart-container"></div>
+                    </figure>
+    
+                    <figure class="highcharts-figure">
+                        <div id="interpersonal-relationship-chart-container"></div>
+                    </figure>
+    
+                    <figure class="highcharts-figure">
+                        <div id="emotional-regulation-chart-container"></div>
+                    </figure>
+                </div>
+            </section>
+            
+        </div>
+        
+    </div>
+    <section id="interface" >
+                    <h2 class="coach-mentoria">Como melhorar os resultados do seu Treinamental</h2>
+
+        <div class="bt-container">
+
+            <a href="">
+                <button onclick="alert('Esta função estará disponível em abril. Aguarde!')">Atitude</button>
+            </a>
+            <a href="">
+                <button onclick="alert('Esta função estará disponível em abril. Aguarde!')">Relação Interpessoal</button>
+            </a>
+            <a href="">
+                <button onclick="alert('Esta função estará disponível em abril. Aguarde!')">Regulação Emocional</button>
+            </a>
+        </div>
+    </section>
+    <footer>
+        <div class="rodape">
+          <p> Neurotreino | Desenvolvido por Kaio Guerrero</p>
+        </div>      
+      </footer>
+</body>    
+
+</html>
