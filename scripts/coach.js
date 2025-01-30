@@ -7,8 +7,9 @@ import HighchartsMore from 'highcharts/highcharts-more';
 
 import './main'; // DO NOT REMOVE THIS
 
-import { firebaseService } from '../services';
+import { firebaseService, notification } from '../services';
 import { CATEGORIES_NAME_MAPPER, FORMS, QUESTIONNAIRES_CATEGORIES } from './constants';
+import { utils } from '../utils';
 
 document.querySelector('#btn-all-forms').addEventListener('click', async () => {
   const step = await firebaseService.form.getUserCurrentFormStep();
@@ -85,6 +86,7 @@ const getFormData = async (form) => {
       general: general.avg,
       user: generalUserResult,
     },
+    lastUserResponseDate: userResultNormalized.created_at,
   };
 };
 
@@ -231,7 +233,7 @@ const initBarChat = (graph, data) => {
 };
 
 const initAttitudeGraph = async () => {
-  const { categories, series, formAvg } = await getFormData(FORMS.ATTITUDE);
+  const { categories, series, formAvg, lastUserResponseDate } = await getFormData(FORMS.ATTITUDE);
   const title = 'Atitude';
 
   initBarChat('attitude-chart-container', {
@@ -242,12 +244,13 @@ const initAttitudeGraph = async () => {
 
   return {
     title,
+    lastUserResponseDate,
     ...formAvg,
   };
 };
 
 const initInterpersonalRelationshipGraph = async () => {
-  const { categories, series, formAvg } = await getFormData(FORMS.INTERPERSONAL_RELATIONSHIP);
+  const { categories, series, formAvg, lastUserResponseDate } = await getFormData(FORMS.INTERPERSONAL_RELATIONSHIP);
   const title = 'Relação Interpessoal';
 
   initPolarChart('interpersonal-relationship-chart-container', {
@@ -258,12 +261,13 @@ const initInterpersonalRelationshipGraph = async () => {
 
   return {
     title,
+    lastUserResponseDate,
     ...formAvg,
   };
 };
 
 const initEmotionalRegulationGraph = async () => {
-  const { categories, series, formAvg } = await getFormData(FORMS.EMOTIONAL_REGULATION);
+  const { categories, series, formAvg, lastUserResponseDate } = await getFormData(FORMS.EMOTIONAL_REGULATION);
   const title = 'Regulação Emocional';
 
   initPolarChart('emotional-regulation-chart-container', {
@@ -274,8 +278,24 @@ const initEmotionalRegulationGraph = async () => {
 
   return {
     title,
+    lastUserResponseDate,
     ...formAvg,
   };
+};
+
+const addCheckFormAnswerHandler = (formKey, lastResponse) => {
+  document.getElementById(`btn-form-${formKey}`).addEventListener('click', async () => {
+    const lastResponseDate = new Date(lastResponse);
+    const now = new Date();
+
+    const canAnswerForm = utils.isMoreThanThreeMonths(now, lastResponseDate);
+
+    if(canAnswerForm) {
+      window.location = `${BASE_URL}questionnaires/${formKey}/?single=true`;
+    } else {
+      notification.warning('Você precisa esperar 3 meses para responder o formulário novamente');
+    }
+  });
 };
 
 const initPage = async () => {
@@ -288,13 +308,19 @@ const initPage = async () => {
     return;
   }
 
-  document.querySelector('#interface').classList.remove('display-none');
-
   const result = await Promise.all([
     initAttitudeGraph(),
     initInterpersonalRelationshipGraph(),
     initEmotionalRegulationGraph(),
   ]);
+
+  const [ attitudeResults, irResults, erResults ] = result;
+
+  addCheckFormAnswerHandler('attitude', attitudeResults.lastUserResponseDate);
+  addCheckFormAnswerHandler('interpersonal_relationship', irResults.lastUserResponseDate);
+  addCheckFormAnswerHandler('emotional_regulation', erResults.lastUserResponseDate);
+
+  document.querySelector('#interface').classList.remove('display-none');
 
   const normalizedResult = result.reduce((acc, cur) => {
     return {
@@ -331,7 +357,7 @@ const initPage = async () => {
   });
 };
 
-document.getElementById('logout-btn')?.addEventListener('click', async () => {
+document.getElementById('logout-btn').addEventListener('click', async () => {
   await firebaseService.auth.signOut();
   window.location = `${BASE_URL}`;
 });
