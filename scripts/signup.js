@@ -70,7 +70,7 @@ const onSubmitForm = async (e) => {
 
     await firebaseService.user.addUser(userData);
     
-    window.location = `${BASE_URL}/coach/`;
+    window.location = `${BASE_URL}coach/`;
 };
 
 document.querySelector("#identification-form").addEventListener("submit",onSubmitForm);

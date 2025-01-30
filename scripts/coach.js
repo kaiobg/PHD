@@ -26,7 +26,7 @@ document.querySelector('#btn-all-forms').addEventListener('click', async () => {
       break;
   }
 
-  window.location = `${BASE_URL}/questionnaires/${currentStep}/`;
+  window.location = `${BASE_URL}questionnaires/${currentStep}/`;
 });
 
 const getFormData = async (form) => {
@@ -290,11 +290,6 @@ const initPage = async () => {
 
   document.querySelector('#interface').classList.remove('display-none');
 
-  document.getElementById('logout-btn')?.addEventListener("click",async () => {
-    await firebaseService.auth.signOut();
-    window.location = `${BASE_URL}/`;
-  });
-
   const result = await Promise.all([
     initAttitudeGraph(),
     initInterpersonalRelationshipGraph(),
@@ -335,6 +330,11 @@ const initPage = async () => {
     series: normalizedResult.series,
   });
 };
+
+document.getElementById('logout-btn')?.addEventListener('click', async () => {
+  await firebaseService.auth.signOut();
+  window.location = `${BASE_URL}`;
+});
 
 firebaseService.auth.addAuthStateListener(async (user) => {
   if(user) {
