@@ -49,7 +49,7 @@ export const QUESTIONS = Object.freeze({
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
-      text: 'Encontro dificuldades para lidar com demandas dos familiares dos atletas.',
+      text: 'Encontro dificuldades para lidar com demandas dos familiares do/a(s) atleta(s).',
       invert: true,
     },
     {
@@ -99,12 +99,12 @@ export const QUESTIONS = Object.freeze({
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
-      text: 'Minhas decisões consideram sempre o impacto no desenvolvimento dos atletas. ',
+      text: 'Minhas decisões consideram sempre o impacto no desenvolvimento do/a(s) atleta(s). ',
       invert: false,
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
-      text: 'O entendimento entre familiares, atletas e treinador é essencial para alcançar os objetivos do time. ',
+      text: 'O entendimento entre familiares, atleta(s) e treinador(a) é essencial para alcançar os objetivos do time. ',
       invert: false,
     },
     {
@@ -124,12 +124,12 @@ export const QUESTIONS = Object.freeze({
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.ORGANIZATIONAL_MANAGEMENT,
-      text: 'Mantenho um relacionamento respeitoso com os familiares dos atletas. ',
+      text: 'Mantenho um relacionamento respeitoso com os familiares do/a(s) atleta(s). ',
       invert: false,
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.DECISION_MAKING,
-      text: 'Levo em consideração a opinião de familiares dos atletas e equipes administrativas para tomar minha decisão no planejamento de treino.  ',
+      text: 'Levo em consideração a opinião de familiares do/a(s)s atleta(s) e equipe(s) administrativas para tomar minha decisão no planejamento de treino.  ',
       invert: true,
     },
     {
@@ -152,32 +152,32 @@ export const QUESTIONS = Object.freeze({
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.COACH_ATHLETE_RELATIONSHIP,
-      text: 'Demonstro sensibilidade em relação às necessidades pessoais dos atletas.',
+      text: 'Demonstro sensibilidade em relação às necessidades pessoais do/(s) atleta(s).',
       invert: false,/*2 */
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.LEADERSHIP,
-      text: 'Não levo em consideração as ideias ou sugestões dos atletas durante os treinos.',
+      text: 'Não levo em consideração as ideias ou sugestões do/a(s) atleta(s) durante os treinos.',
       invert: true,/*3 */
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.LEADERSHIP,
-      text: 'Adapto os treinos ao nível de habilidade dos atletas.',
+      text: 'Adapto os treinos ao nível de habilidade do/a(s) atleta(s).',
       invert: false,/*4 */
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.COACH_ATHLETE_RELATIONSHIP,
-      text: 'Promovo um ambiente em que os atletas se sentem à vontade para expressar ideias e preocupações.',
+      text: 'Promovo um ambiente em que o/a(s) atleta(s) se sentem à vontade para expressar ideias e preocupações.',
       invert: false,/*5*/
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.COACH_ATHLETE_RELATIONSHIP,
-      text: 'Não dou atenção ao bem-estar emocional dos atletas.',
+      text: 'Não dou atenção ao bem-estar emocional do/a(s) atleta(s).',
       invert: true,/*6*/
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.LEADERSHIP,
-      text: 'Recompenso o esforço e desempenho positivo dos atletas.',
+      text: 'Recompenso o esforço e desempenho positivo do/a(s) atleta(s).',
       invert: false,/*7 */
     },
     {
@@ -187,7 +187,7 @@ export const QUESTIONS = Object.freeze({
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.COACH_ATHLETE_RELATIONSHIP,
-      text: 'Desconsidero os sentimentos e insatisfações dos atletas. ',
+      text: 'Desconsidero os sentimentos e insatisfações do/a(s) atleta(s). ',
       invert: true,/*9*/
     },
     {
@@ -202,17 +202,17 @@ export const QUESTIONS = Object.freeze({
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.COMMUNICATION,
-      text: 'Utilizo feedback verbal e não verbal para incentivar os atletas.',
+      text: 'Utilizo feedback verbal e não verbal para incentivar o/a(s) atleta(s).',
       invert: false,/*12 */
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.COMMUNICATION,
-      text: 'Tenho dificuldade em comunicar as prioridades do treinamento aos atletas. ',
+      text: 'Tenho dificuldade em comunicar as prioridades do treinamento ao/a(s) atleta(s). ',
       invert: true,/*13 */
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.COACH_ATHLETE_RELATIONSHIP,
-      text: 'Construo uma relação de confiança com meus atletas, individualmente e em grupo.',
+      text: 'Construo uma relação de confiança com atletas, individualmente e em grupo.',
       invert: false,/*14 */
     },
     {
@@ -222,7 +222,7 @@ export const QUESTIONS = Object.freeze({
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.LEADERSHIP,
-      text: 'Parabenizo publicamente os atletas por boas atuações e contribuições ao time.',
+      text: 'Parabenizo publicamente o/a(s) atleta(s) por boas atuações e contribuições ao time.',
       invert: false,/*16 */
     },
     {
@@ -232,19 +232,19 @@ export const QUESTIONS = Object.freeze({
     },    
     {
       category: QUESTIONNAIRES_CATEGORIES.COACH_ATHLETE_RELATIONSHIP,
-      text: 'Estou atento ao bem-estar físico e emocional dos atletas.',
+      text: 'Estou atento(a) ao bem-estar físico e emocional do/a(s) atleta(s).',
       invert: false,/*18 */
     },
 
     
     {
       category: QUESTIONNAIRES_CATEGORIES.LEADERSHIP,
-      text: 'Tenho dificuldade em engajar os atletas no planejamento das estratégias.',
+      text: 'Tenho dificuldade em engajar o/a(s) atleta(s) no planejamento das estratégias.',
       invert: false,/*19 */
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.LEADERSHIP,
-      text: 'Estimulo os atletas a participarem do planejamento e definição de estratégias para competições.',
+      text: 'Estimulo o/a(s) atleta(s) a participarem do planejamento e definição de estratégias para competições.',
       invert: false,/*20 */
     },
   ],
@@ -266,7 +266,7 @@ export const QUESTIONS = Object.freeze({
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.STRESS,
-      text: 'Eu sou bom em encontrar soluções práticas para lidar com a pressão durante o jogo.',
+      text: 'Eu sou bom(boa) em encontrar soluções práticas para lidar com a pressão durante o jogo.',
       invert: false,/*4*/
     },
     {
@@ -306,7 +306,7 @@ export const QUESTIONS = Object.freeze({
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.STRESS,
-      text: 'Quando as coisas não saem conforme planejado, eu fico nervoso e fico sem saber como agir. ',
+      text: 'Quando as coisas não saem conforme planejado, eu fico nervoso(a) e fico sem saber como agir. ',
       invert: true,/*12*/
     },
     {
@@ -321,7 +321,7 @@ export const QUESTIONS = Object.freeze({
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.STRESS,
-      text: 'Quando estou estressado durante a competição, consigo controlar minha respiração e ações. ',
+      text: 'Quando estou estressado(a) durante a competição, consigo controlar minha respiração e ações. ',
       invert: false,/*15*/
     },
     {
@@ -331,7 +331,7 @@ export const QUESTIONS = Object.freeze({
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.POSITIVE_MENTAL_HEALTH,
-      text: 'Eu me sinto feliz e satisfeito(a) com o que estou realizando na minha carreira de treinador. ',
+      text: 'Eu me sinto feliz e satisfeito(a) com o que estou realizando na minha carreira de treinador(a). ',
       invert: false,/*17*/
     },
     {
@@ -366,7 +366,7 @@ export const QUESTIONS = Object.freeze({
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.POSITIVE_MENTAL_HEALTH,
-      text: 'Sinto que estou tendo um impacto positivo na vida dos meus atletas. ',
+      text: 'Sinto que estou tendo um impacto positivo na vida de meus atletas. ',
       invert: false,/*24*/
     },
     {
@@ -376,7 +376,7 @@ export const QUESTIONS = Object.freeze({
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.STRESS,
-      text: 'Eu me sinto constantemente sobrecarregado pelas demandas da competição. ',
+      text: 'Eu me sinto constantemente sobrecarregado(a) pelas demandas da competição. ',
       invert: true,/*26*/
     },
     {
@@ -396,7 +396,7 @@ export const QUESTIONS = Object.freeze({
     },
     {
       category: QUESTIONNAIRES_CATEGORIES.POSITIVE_MENTAL_HEALTH,
-      text: 'Muitas vezes me pego tendo pensamentos negativos sobre minha carreira de treinador. ',
+      text: 'Muitas vezes me pego tendo pensamentos negativos sobre minha carreira de treinador(a). ',
       invert: true,/*30*/
     },
   ],
