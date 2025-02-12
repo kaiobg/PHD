@@ -3,10 +3,6 @@ import '../styles/questionnaires.css'; // DO NOT REMOVE THIS
 
 import './main'; // DO NOT REMOVE THIS
 
-// TODO Add load to project
-// TODO Conseguir comparar a média por Gênero / Modalidade / tempo de experiência (Colocar checkboxes pra pessoa conseguir selecionar)
-// TODO Já colocar o bloqueio para não responder várias vezes
-
 import { utils } from '../utils';
 
 import { COACH_PAGE, FORMS, FORMS_PASCAL_CASE, NEXT_PAGE, PREVIOUS_PAGE, QUESTIONS } from './constants';

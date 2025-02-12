@@ -188,39 +188,12 @@ export const saveGeneralForm = async (currentForm, data) => {
   return false;
 };
 
-export const getGeneralFormCategoriesAverage = async (form) => {
+export const getGeneralFormResults = async (form) => {
   try {
     const collectionRef = collection(db, form);
     const docsSnap = await getDocs(collectionRef);
 
-    const avg = docsSnap.docs.reduce((acc, doc) => {
-      const docData = doc.data();
-      const keys = Object.keys(docData);
-      const categories = keys.reduce((accKeys, curKey) => {
-        if(![...Object.values(QUESTIONNAIRES_CATEGORIES), 'general'].includes(curKey)) {
-          return accKeys;
-        }
-
-        const totalSum = (acc[curKey]?.sum || 0) + docData[curKey];
-        const totalCount = (acc[curKey]?.count || 0) + 1;
-        
-        return {
-          ...accKeys,
-          [curKey]: {
-            sum: totalSum,
-            count: totalCount,
-            avg: totalSum / totalCount,
-          },
-        };
-      }, {});
-
-      return {
-        ...acc,
-        ...categories,
-      };
-    }, {});
-
-    return avg;
+    return docsSnap.docs.map(doc => doc.data());
   } catch(error) {
     console.error(error);
   }

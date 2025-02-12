@@ -11,6 +11,10 @@ import { firebaseService, notification } from '../services';
 import { CATEGORIES_NAME_MAPPER, FORMS, QUESTIONNAIRES_CATEGORIES } from './constants';
 import { utils } from '../utils';
 
+let attitudeData, irData, erData;
+
+const filterForm = document.querySelector('#charts-filter');
+
 document.querySelector('#btn-all-forms').addEventListener('click', async () => {
   const step = await firebaseService.form.getUserCurrentFormStep();
   let currentStep = '';
@@ -32,9 +36,63 @@ document.querySelector('#btn-all-forms').addEventListener('click', async () => {
 
 const getFormData = async (form) => {
   const userResultSnap = await firebaseService.form.getUserLatestResult(form);
-  const { general: generalUserResult, ...userResultNormalized } = userResultSnap.empty ? null : userResultSnap.data();
-  const formAvg = await firebaseService.form.getGeneralFormCategoriesAverage(form);
-  const { general, ...normalizedFormAvg } = formAvg;
+  const userResults = userResultSnap.empty ? null : userResultSnap.data();
+  const formResults = await firebaseService.form.getGeneralFormResults(form);
+  
+  return { userResults, formResults };
+};
+
+const processGeneralFormAverage = (formResults) => {
+  const filterData = new FormData(filterForm);
+  const criteria = filterData.getAll('criteria');
+
+  const result = formResults.reduce((acc, docData) => {
+    const keys = Object.keys(docData);
+    const categories = keys.reduce((accKeys, curKey) => {
+      if(![...Object.values(QUESTIONNAIRES_CATEGORIES), 'general'].includes(curKey)) {
+        return accKeys;
+      }
+
+      const matchExperienceFilter = !criteria.includes('experience') || (criteria.includes('experience') && firebaseService.user.getUserData('experience') == docData.experience);
+      const matchGenderFilter = !criteria.includes('gender') || (criteria.includes('gender') && firebaseService.user.getUserData('gender') == docData.gender);
+      const matchModalityFilter = !criteria.includes('modality') || (criteria.includes('modality') && firebaseService.user.getUserData('modality') == docData.modality);
+
+      const matchFilterCriteria = matchExperienceFilter && matchGenderFilter && matchModalityFilter;
+
+      const totalSum = (acc[curKey]?.sum || 0) + (matchFilterCriteria ? docData[curKey] : 0);
+      const totalCount = (acc[curKey]?.count || 0) + (matchFilterCriteria ? 1 : 0);
+      
+      return {
+        ...accKeys,
+        [curKey]: {
+          sum: totalSum,
+          count: totalCount,
+          avg: totalSum / totalCount,
+        },
+      };
+    }, {});
+
+    return {
+      ...acc,
+      ...categories,
+    };
+  }, {});
+
+  return result;
+};
+
+const processFormData = (data) => {
+  const { userResults, formResults } = data;
+
+  if(!userResults) {
+    return;
+  }
+
+  const formAvg = processGeneralFormAverage(formResults);
+
+  const { general: generalFormAvg, ...normalizedFormAvg } = formAvg;
+  const { general: generalUserResult, ...userResultNormalized } = userResults;
+
   const categoriesData = Object.keys(normalizedFormAvg).reduce((acc, cur) => {
     return {
       ...acc,
@@ -57,22 +115,25 @@ const getFormData = async (form) => {
     avgs: [],
   });
 
+  const filterData = new FormData(filterForm);
+  const compareWithOthers = filterData.getAll('compare').length > 0;
+
   const series = categoriesData.keys.reduce((acc, cur) => {
     const categoryAverage = normalizedFormAvg[cur]?.avg;
     const hasCategoryAvg = categoryAverage != null;
 
     return [
-      {
+      ...(compareWithOthers ? [{
         name: 'Média Geral',
         data: [
           ...(acc[0]?.data || []),
           categoryAverage || 0,
         ],
-      },
+      }] : []),
       {
         name: 'Sua Nota',
         data: [
-          ...(acc[1]?.data || []),
+          ...(acc[compareWithOthers ? 1 : 0]?.data || []),
           hasCategoryAvg ? userResultNormalized[cur] : 0,
         ],
       },
@@ -82,11 +143,8 @@ const getFormData = async (form) => {
   return {
     categories: categoriesData.names,
     series,
-    formAvg: {
-      general: general.avg,
-      user: generalUserResult,
-    },
-    lastUserResponseDate: userResultNormalized.created_at,
+    generalFormAvg,
+    generalUserResult,
   };
 };
 
@@ -165,7 +223,7 @@ const initPolarChart = (graph, data) => {
   });  
 };
 
-const initBarChat = (graph, data) => {
+const initBarChart = (graph, data) => {
   // Example: https://www.highcharts.com/demo/highcharts/bar-chart
   const { title, categories, series } = data;
 
@@ -232,11 +290,11 @@ const initBarChat = (graph, data) => {
   });
 };
 
-const initAttitudeGraph = async () => {
-  const { categories, series, formAvg, lastUserResponseDate } = await getFormData(FORMS.ATTITUDE);
+const initAttitudeGraph = async (data) => {
+  const { categories, series, generalFormAvg, generalUserResult } = await processFormData(data);
   const title = 'Atitude';
 
-  initBarChat('attitude-chart-container', {
+  initBarChart('attitude-chart-container', {
     title,
     categories,
     series,
@@ -244,13 +302,13 @@ const initAttitudeGraph = async () => {
 
   return {
     title,
-    lastUserResponseDate,
-    ...formAvg,
+    generalFormAvg,
+    generalUserResult,
   };
 };
 
-const initInterpersonalRelationshipGraph = async () => {
-  const { categories, series, formAvg, lastUserResponseDate } = await getFormData(FORMS.INTERPERSONAL_RELATIONSHIP);
+const initInterpersonalRelationshipGraph = async (data) => {
+  const { categories, series, generalFormAvg, generalUserResult } = await processFormData(data);
   const title = 'Relação Interpessoal';
 
   initPolarChart('interpersonal-relationship-chart-container', {
@@ -261,13 +319,13 @@ const initInterpersonalRelationshipGraph = async () => {
 
   return {
     title,
-    lastUserResponseDate,
-    ...formAvg,
+    generalFormAvg,
+    generalUserResult,
   };
 };
 
-const initEmotionalRegulationGraph = async () => {
-  const { categories, series, formAvg, lastUserResponseDate } = await getFormData(FORMS.EMOTIONAL_REGULATION);
+const initEmotionalRegulationGraph = async (data) => {
+  const { categories, series, generalFormAvg, generalUserResult } = await processFormData(data);
   const title = 'Regulação Emocional';
 
   initPolarChart('emotional-regulation-chart-container', {
@@ -278,8 +336,8 @@ const initEmotionalRegulationGraph = async () => {
 
   return {
     title,
-    lastUserResponseDate,
-    ...formAvg,
+    generalFormAvg,
+    generalUserResult,
   };
 };
 
@@ -298,32 +356,23 @@ const addCheckFormAnswerHandler = (formKey, lastResponse) => {
   });
 };
 
-const initPage = async () => {
-  const hasAnswerForAllForms = firebaseService.user.getUserData('hasAnswerForAllForms');
-
-  document.querySelector('#coach-name').innerText = firebaseService.user.getUserData('name');
-
-  if(!hasAnswerForAllForms) {
-    document.querySelector('#first-access').classList.remove('display-none');
-    utils.hideLoading();
-    return;
-  }
-
+const regenerateCharts = async () => {
   const result = await Promise.all([
-    initAttitudeGraph(),
-    initInterpersonalRelationshipGraph(),
-    initEmotionalRegulationGraph(),
+    initAttitudeGraph(attitudeData),
+    initInterpersonalRelationshipGraph(irData),
+    initEmotionalRegulationGraph(erData),
   ]);
 
-  const [ attitudeResults, irResults, erResults ] = result;
+  const { userResults: attitudeUserResults } = attitudeData;
+  const { userResults: irUserResults } = irData;
+  const { userResults: erUserResults } = erData;
 
-  addCheckFormAnswerHandler('attitude', attitudeResults.lastUserResponseDate);
-  addCheckFormAnswerHandler('interpersonal_relationship', irResults.lastUserResponseDate);
-  addCheckFormAnswerHandler('emotional_regulation', erResults.lastUserResponseDate);
+  addCheckFormAnswerHandler('attitude', attitudeUserResults.created_at);
+  addCheckFormAnswerHandler('interpersonal_relationship', irUserResults.created_at);
+  addCheckFormAnswerHandler('emotional_regulation', erUserResults.created_at);
 
-  document.querySelector('#interface').classList.remove('display-none');
-
-  utils.hideLoading();
+  const filterData = new FormData(filterForm);
+  const compareWithOthers = filterData.getAll('compare').length > 0;
 
   const normalizedResult = result.reduce((acc, cur) => {
     return {
@@ -332,18 +381,18 @@ const initPage = async () => {
         cur.title,
       ],
       series: [
-        {
+        ...(compareWithOthers ? [{
           name: 'Média Geral',
           data: [
             ...(acc.series[0]?.data || []),
-            cur.general,
+            cur.generalFormAvg.avg,
           ],
-        },
+        }] : []),
         {
           name: 'Sua Nota',
           data: [
-            ...(acc.series[1]?.data || []),
-            cur.user,
+            ...(acc.series[compareWithOthers ? 1 : 0]?.data || []),
+            cur.generalUserResult,
           ],
         },
       ],
@@ -358,6 +407,39 @@ const initPage = async () => {
     categories: normalizedResult.categories,
     series: normalizedResult.series,
   });
+};
+
+const initPage = async () => {
+  const hasAnswerForAllForms = firebaseService.user.getUserData('hasAnswerForAllForms');
+
+  document.querySelector('#coach-name').innerText = firebaseService.user.getUserData('name');
+
+  if(!hasAnswerForAllForms) {
+    document.querySelector('#first-access').classList.remove('display-none');
+    utils.hideLoading();
+    return;
+  }
+
+  const results = await Promise.all([
+    getFormData(FORMS.ATTITUDE),
+    getFormData(FORMS.INTERPERSONAL_RELATIONSHIP),
+    getFormData(FORMS.EMOTIONAL_REGULATION),
+  ]);
+
+  attitudeData = results[0];
+  irData = results[1];
+  erData = results[2];
+
+  await regenerateCharts();
+
+  document.querySelector('#interface').classList.remove('display-none');
+  filterForm.querySelectorAll('input').forEach(input => {
+    input.addEventListener('change', async () => {
+      await regenerateCharts();
+    });
+  });
+
+  utils.hideLoading();
 };
 
 document.getElementById('logout-btn').addEventListener('click', async () => {
