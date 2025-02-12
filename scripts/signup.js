@@ -23,15 +23,15 @@ const onSubmitForm = async (e) => {
     const tcle=form.tcle.checked
 
     if (name.length<=0) {
-        notification.error("Meu jovem, coloque seu nome!")
+        notification.error("Por favor, coloque seu nome!")
         return;
     }
     if (birth.length<=0) {
-        notification.error("Responde sua data de nascimento")
+        notification.error("Responda sua data de nascimento")
         return;
     }
     if (+age < 18) {
-        notification.error("Não poderá participar, volte aos 18!")
+        notification.error("Não poderá participar, volte quando tiver 18!")
         return;
     }
     if (gender.length<=0) {
@@ -56,11 +56,11 @@ const onSubmitForm = async (e) => {
         return;
     }
     if (password.length<=0 || password!= confirmpassword) {
-        notification.error("Faça uma senha.")
+        notification.error("Crie uma senha.")
         return;
     }
     if (tcle == false){
-        notification.error("assina essa parada mano (mona)!")
+        notification.error("Assine o termo por favor!")
         return;
     }
 
