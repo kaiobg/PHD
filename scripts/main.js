@@ -1,3 +1,5 @@
 import { firebaseService } from '../services';
 
-firebaseService.auth.checkAuthState();
+(async () => {
+  await firebaseService.auth.checkAuthState();
+})();

@@ -60,7 +60,7 @@ export const signOut = async () => {
   }
 };
 
-export const checkAuthState = () => {
+export const checkAuthState = async () => {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       console.log('user is signed in');

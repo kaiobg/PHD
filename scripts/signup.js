@@ -6,6 +6,8 @@ import './main'; // DO NOT REMOVE THIS
 import { firebaseService, notification } from '../services';
 import { utils } from '../utils';
 
+let checkIfIsLoggedIn = true;
+
 const onSubmitForm = async (e) => {
     e.preventDefault();
 
@@ -15,6 +17,7 @@ const onSubmitForm = async (e) => {
     const age=form.age.value.trim()
     const gender=form.gender.value.trim()
     const modality=form.modality.value.trim()
+    const otherModality = form['other-modality'].value.trim();
     const experience=form.experience.value.trim()
     const formation=form.formation.value.trim()
     const email=form.email.value.trim()
@@ -42,6 +45,12 @@ const onSubmitForm = async (e) => {
         notification.error("Qual modalidade você é treinador(a)")
         return;
     }
+
+    if(modality == 'outros' && otherModality.length <= 0) {
+      notification.error("Informe sua modalidade")
+      return;
+    }
+
     if (experience.length<=0) {
         notification.error("Preencha o tempo de experiência.")
         return;
@@ -65,21 +74,64 @@ const onSubmitForm = async (e) => {
     }
 
     
-    const userData={
-        name, birth, age, gender,modality,experience,formation,email,password
-    }
+    const userData = {
+      name, 
+      birth, 
+      age, 
+      gender,
+      modality,
+      otherModality,
+      experience,
+      formation,
+      email,
+      password,
+    };
 
-    await firebaseService.user.addUser(userData);
-    
-    window.location = `${BASE_URL}coach/`;
+    const result = await firebaseService.user.addUser(userData);
+
+    if(result) {
+      window.location = `${BASE_URL}coach/`;
+    }
 };
 
 document.querySelector("#identification-form").addEventListener("submit",onSubmitForm);
 
 firebaseService.auth.addAuthStateListener(async (user) => {
-  if(user) {
+  if(checkIfIsLoggedIn && user) {
     window.location = `${BASE_URL}coach/`;
   }
 
+  checkIfIsLoggedIn = false;
+
   utils.hideLoading();
 });
+
+const modalitySelect = document.querySelector('#modality');
+const otherModalityInput = document.querySelector('#other-modality-input');
+const otherModalityLabel = document.querySelector('#other-modality-label');
+
+modalitySelect.addEventListener('change', () => {
+  const modality = modalitySelect.value;
+
+  const classHandler = modality == 'outros' ? 'remove' : 'add';
+  otherModalityInput.classList[classHandler]('display-none');
+  otherModalityLabel.classList[classHandler]('display-none');
+});
+
+
+// Fill form for tests
+// (() => {
+//   const form = document.querySelector("#identification-form");
+//   form.name.value = 'Nome';
+//   form.birth.value = '1997-05-11';
+//   form.age.value = 19;
+//   form.gender.value = 'feminino';
+//   form.modality.value = 'outros';
+//   form['other-modality'].value = 'uma aí';
+//   form.experience.value = '3-5';
+//   form.formation.value = 'mest';
+//   form.email.value = 'email@email.com';
+//   form.senha.value = '123123';
+//   form.confirmpassword.value = '123123';
+//   form.tcle.checked = true;
+// })();

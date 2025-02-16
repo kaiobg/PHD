@@ -44,7 +44,7 @@
                         <option value="nao-falx">Prefiro não dizer</option>
                     </select>
                     
-                    <label for="occupation">Modalidade esportiva principal:</label>
+                    <label for="modality">Modalidade esportiva principal:</label>
                     <select id="modality" name="modality" required>
                         <option value="" disabled selected>Selecione</option>
                         <option value="Atletismo">Atletismo</option>
@@ -71,8 +71,10 @@
                         <option value="praia">Vôlei de praia</option>
                         <option value="Xadrez">Xadrez</option>
                         <option value="outros">Outra modalidade</option>
-                        
                     </select>
+
+                    <label for="other-modality" id="other-modality-label" class="display-none">Qual?</label>
+                    <input type="text" name="other-modality" id="other-modality-input" class="display-none" />
                     
                     <label for="experience">Tempo de Experiência como treinador (a) nesta modalidade:</label>
                     <select id="experience" name="experience" required>

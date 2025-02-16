@@ -22,9 +22,12 @@ export const addUser = async (data) => {
       userData,
     );
     
+    return true;
   } catch(error) {
     notification.error(e);
   }
+
+  return false;
 };
 
 export const hasAnswerForAllForms = async (uid) => {
