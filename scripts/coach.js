@@ -14,6 +14,11 @@ import { utils } from '../utils';
 let attitudeData, irData, erData;
 
 const filterForm = document.querySelector('#charts-filter');
+const compareWithOtherOptions =  document.querySelector('#compare-with-other-options');
+
+document.querySelector('#show-general-results-option').addEventListener('change', () => {
+  compareWithOtherOptions.classList.toggle('display-none');
+});
 
 document.querySelector('#btn-all-forms').addEventListener('click', async () => {
   const step = await firebaseService.form.getUserCurrentFormStep();

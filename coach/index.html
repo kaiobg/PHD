@@ -42,26 +42,28 @@
                     <form id="charts-filter">
                         <div>
                             <label>
-                                <input type="checkbox" name="compare" value="true" />
+                                <input type="checkbox" name="compare" value="true" id="show-general-results-option" />
                                 Mostrar resultado geral
                             </label>
                         </div>
 
-                        <span>Comparar apenas respostas com a mesma:</span>
-
-                        <div>
-                            <label>
-                                <input type="checkbox" name="criteria" value="experience" />
-                                Experiência
-                            </label>
-                            <label>
-                                <input type="checkbox" name="criteria" value="gender" />
-                                Genêro
-                            </label>
-                            <label>
-                                <input type="checkbox" name="criteria" value="modality" />
-                                Modalidade
-                            </label>
+                        <div id="compare-with-other-options" class="display-none">
+                            <span>Comparar apenas respostas com a mesma:</span>
+    
+                            <div>
+                                <label>
+                                    <input type="checkbox" name="criteria" value="experience" />
+                                    Experiência
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="criteria" value="gender" />
+                                    Genêro
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="criteria" value="modality" />
+                                    Modalidade
+                                </label>
+                            </div>
                         </div>
                     </form>
                 </div>
