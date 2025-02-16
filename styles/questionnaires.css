@@ -110,7 +110,7 @@
 }
 
 .step {
-  background: var(--background-color);
+  background: #F2F8CC;
   z-index: 1;
   padding: 0 1rem;
 
