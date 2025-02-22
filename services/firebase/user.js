@@ -75,6 +75,26 @@ export const loginUser = async (uid) => {
   }
 };
 
+export const confirmCopyrightStatus = async () => {
+  try {
+    const { uid } = await firebaseService.auth.getCurrentUser();
+
+    await setDoc(
+      doc(db, 'users', uid),
+      { confirmedCopyright: true },
+      { merge: true },
+    );
+
+    firebaseService.user.setUserData('confirmedCopyright', true);
+    
+    return true;
+  } catch(e) {
+    notification.error(e);
+  }
+
+  return false;
+};
+
 export const logoutUser = async () => {
   sessionStorage.removeItem(USER_SESSION_KEY);
 };

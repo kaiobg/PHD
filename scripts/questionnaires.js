@@ -26,8 +26,29 @@ let answers = [];
 const pageUrl = new URL(window.location.href);
 const isSingleForm = pageUrl.searchParams.get('single') == 'true';
 
+const checkCopyrightStatus = async () => {
+  const copyrightConfirmed = firebaseService.user.getUserData('confirmedCopyright');
+  if(copyrightConfirmed) {
+    updateQuestionLayout();
+    return;
+  }
+
+  const result = confirm('Esse questionário é protegido por direitos autorais e não pode ser copiado ou reutilizado. Você entende isso?'); // TODO KAIO arrumar essa mensagem
+  
+  if(!result) {
+    alert('É necessário confirmar os direitos autorais para acessar. Acesso negado.');
+    window.location = `${BASE_URL}${COACH_PAGE}`;
+    return;
+  }
+
+  await firebaseService.user.confirmCopyrightStatus();
+  updateQuestionLayout();
+};
+
 firebaseService.auth.addAuthStateListener(async (user) => {
   if(user) {
+    await checkCopyrightStatus();
+
     const savedAnswer = await firebaseService.form.getFormFromUser(currentForm);
 
     if(savedAnswer) {
@@ -215,5 +236,3 @@ btnPreviousForm.addEventListener('click', previousForm);
 btnPreviousQuestion.addEventListener('click', previousQuestion);
 btnNextQuestion.addEventListener('click', nextQuestion);
 btnEndForm.addEventListener('click', sendForm);
-
-updateQuestionLayout();
