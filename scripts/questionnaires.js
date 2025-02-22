@@ -5,7 +5,7 @@ import './main'; // DO NOT REMOVE THIS
 
 import { utils } from '../utils';
 
-import { COACH_PAGE, FORMS, FORMS_PASCAL_CASE, NEXT_PAGE, PREVIOUS_PAGE, QUESTIONS } from './constants';
+import { COACH_PAGE, FORMS, NEXT_PAGE, PREVIOUS_PAGE, QUESTIONS } from './constants';
 import { firebaseService, notification } from '../services';
 
 const questionEl = document.querySelector('#question');

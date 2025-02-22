@@ -4,12 +4,6 @@ export const FORMS = Object.freeze({
   EMOTIONAL_REGULATION: 'emotional_regulation',
 });
 
-export const FORMS_PASCAL_CASE = Object.freeze({
-  [FORMS.ATTITUDE]: 'Attitude',
-  [FORMS.INTERPERSONAL_RELATIONSHIP]: 'InterpersonalRelationship',
-  [FORMS.EMOTIONAL_REGULATION]: 'EmotionalRegulation',
-});
-
 export const QUESTIONNAIRES_CATEGORIES = Object.freeze({
   // Attitude
   ORGANIZATIONAL_MANAGEMENT: 'organizational_management',
