@@ -5,6 +5,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut as firebaseSignOut,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 
 import { app } from './firebase-app';
@@ -58,6 +59,23 @@ export const signOut = async () => {
     console.error(error);
     notification.error(error);
   }
+};
+
+export const resetPassword = async(email) => {
+  try {
+    const normalizedBaseUrl = BASE_URL == '/' ? 'http://localhost:3000/' : BASE_URL;
+    
+    await sendPasswordResetEmail(auth, email, {
+      url: `${normalizedBaseUrl}login/`,
+    });
+
+
+    return true;
+  } catch (error) {
+    notification.error(error);
+  }
+
+  return false;
 };
 
 export const checkAuthState = async () => {

@@ -10,6 +10,7 @@ module.exports = {
     home: './scripts/home.js',
     login: './scripts/login.js',
     questionnaires: './scripts/questionnaires.js',
+    'reset-password': './scripts/reset-password.js',
     signup: './scripts/signup.js',
   },
   output: {
@@ -81,6 +82,13 @@ module.exports = {
           },
         },
         {
+          from: path.resolve(__dirname, 'reset-password/index.html'),
+          to: path.resolve(__dirname, 'dist/reset-password/'),
+          transform(content) {
+            return content.toString().replace(/__BASE_URL__/g, process.env.BASE_URL || '/');
+          },
+        },
+        {
           from: path.resolve(__dirname, 'signup/index.html'),
           to: path.resolve(__dirname, 'dist/signup/'),
           transform(content) {
@@ -91,28 +99,6 @@ module.exports = {
     }),
   ],
   devServer: {
-    // static: [
-    //   {
-    //     directory: path.join(__dirname, 'home'),
-    //     publicPath: '/'
-    //   },
-    //   {
-    //     directory: path.join(__dirname, 'coach'),
-    //     publicPath: '/coach'
-    //   },
-    //   {
-    //     directory: path.join(__dirname, 'login'),
-    //     publicPath: '/login'
-    //   },
-    //   {
-    //     directory: path.join(__dirname, 'questionnaires'),
-    //     publicPath: '/questionnaires'
-    //   },
-    //   {
-    //     directory: path.join(__dirname, 'signup'),
-    //     publicPath: '/signup'
-    //   },
-    // ],
     port: 3000,
     hot: true,
     open: true,
